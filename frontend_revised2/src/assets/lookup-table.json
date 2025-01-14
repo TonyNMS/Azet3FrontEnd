@@ -1,0 +1,46 @@
+{
+    "P_nominal":{"dispName":"Power Grid Norminal Power", "type":"float", "message":"Power Grid Norminal Power"},
+    "hydrogen_tank_SOC_start":{"dispName":"Initial Hydrogen Tank Level", "type":"float", "message":"Percentage of Initial hydrogen Tank Level"},
+    "hydrogen_tank_storage":{"dispName":"Hydrogen Tank Storage", "type":"int", "message":"Hydrogen Tank Size in Liters"},
+    "fuel_tank_content_diesel":{"dispName":"Fuel Tank Content Mass", "type":"int", "message":"Mass of Fuel in Fuel Tank for Generator"},
+    "transCellSplitter_MaxRatedPowerCell":{},
+    "transCellSplitter_Minimal_SOC":{},
+    "hydrogenTank_Tempurature" :{"dispName":"Hydrogen Tank Tempurature (K)", "type":"int", "message":"Hydrogen tank tempurature in K"},
+    "hydrogenTank_use_pressure_constraint":{"dispName":"Use Pressure Constrain for Hydrogen Tank?", "type":"true", "message":"Pressure as a Constrain for Hydrogen Tank"},
+
+
+    "fc250CurrentLogic_LowOperationValue":{},
+    "fc250CurrentLogic_HighOperationValue":{},
+    "fc250CurrentLogic_FCMaxRatedPower":{},
+    "fc250CurrentLogic_StackRatedVoltage":{},
+    "fc250CurrentLogic_FCMaxRatedCurrent":{},
+
+    
+    "fuelCell_Tempurature":{"dispName":"Fuel Cell Operation Tempurature (K)", "type":"float", "message":"Operation tempurature in fuel cell"},
+    "fuelCell_P_H2":{"dispName":"Fuel Cell H2 Anode Surface Pressure", "type":"int", "message":"Fuel Cell Anode Surface Pressure"},
+    "fuelCell_P_Q2":{"dispName":"Fuel Cell O2 Cathode Surface Pressure", "type":"int", "message":"Fuel Cell Cathode Pressure"},
+    "fuelCell_P_max":{"dispName":"Fuel Cell Max Power Output", "type":"float", "message":"Max power output of the the fuel cell stack, default to Rated Power 21200w"},
+    "fuelCell_P_min":{"dispName":"Fuel Cell Min Power Output", "type":"float", "message":"Min power output of the the fuel cell stack, default 0w"},
+    "fuelCell_A_cell":{"dispName":"Fuel Cell Membrane Surface Area", "type":"float", "message":"Surface area of a single fuel cell"},
+    "fuelCell_n_cell":{"dispName":"Fuel Cell Count", "type":"int", "message":"Amount of Fuel Cell in the Stack"},
+    "fuelCell_eta":{"dispName":"Fuel Cell Effciency", "type":"float", "message":"Fuel Cell Effciency in percentage"},
+    "fuelCell_control_power":{"dispName":"", "type":"", "message":""},
+
+    "generator_V_flow_Frat":{"dispName":"", "type":"", "message":""},
+    "generator_V_flow_Fidle":{"dispName":"", "type":"", "message":""},
+    "generator_Use_Const_Off":{"dispName":"", "type":"", "message":""},
+    "generator_Eta_El_Const":{"dispName":"", "type":"", "message":""},
+    "generator_FuelConsumptionIsVolumetric":{"dispName":"", "type":"", "message":""},
+    "generator_M_Flow_Fidle":{"dispName":"", "type":"", "message":""},
+    "generator_M_Flow_FRat":{"dispName":"", "type":"", "message":""},
+    "generator_P_rat":{"dispName":"", "type":"", "message":""},
+
+    "battery_Eff_Charge":{"dispName":"", "type":"", "message":""},
+    "battery_Set_SOC_Final_Start":{"dispName":"", "type":"", "message":""},
+    "battery_Capacity":{"dispName":"", "type":"", "message":""},
+    "battery_P_max":{"dispName":"", "type":"", "message":""},
+    "battery_SOC_start":{"dispName":"", "type":"", "message":""},
+    "idealTank_M_content_max":{"dispName":"", "type":"", "message":""},
+    "idealTank_M_content_start":{"dispName":"", "type":"", "message":""}
+
+}
