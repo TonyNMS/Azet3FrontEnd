@@ -51,7 +51,7 @@ function App() {
   };
   const updateChangedParametersArray = (a)=>{
     if (a.param === "numberOfIntervals"){
-      const newList = changedParameters.filter(item=>item.param !==a.param && item.param !=="interval");
+      const newList = changedParameters.filter(item=>item.param !== a.param && item.param !=="interval");
       console.log(`current overriden parameter ${[...newList, a].map(b=>JSON.stringify(b))}`);
       setChangedParameters([...newList, a]);
     }else if (a.param === "interval"){
@@ -61,7 +61,7 @@ function App() {
     }else{
       const newList = changedParameters.filter(item=>item.param !== a.param);
       console.log(`current overriden parameter ${[...newList, a].map(b=>JSON.stringify(b))}`);
-      setChangedParameters([...newList, a]);
+      setChangedParameters([...newList, a]);  
     }
   };
   const resetChangedParameterArray =()=>{

@@ -3,6 +3,7 @@
     "hydrogen_tank_SOC_start":{"dispName":"Initial Hydrogen Tank Level", "type":"float", "message":"Percentage of Initial hydrogen Tank Level"},
     "hydrogen_tank_storage":{"dispName":"Hydrogen Tank Storage", "type":"int", "message":"Hydrogen Tank Size in Liters"},
     "fuel_tank_content_diesel":{"dispName":"Fuel Tank Content Mass", "type":"int", "message":"Mass of Fuel in Fuel Tank for Generator"},
+    "fuel_tank_content_dieselStart":{"dispName":"Fuel Tank Initial Mass", "type":"int", "message":"Mass of Fuel in Fuel Tank for Generator at Start"},
     "transCellSplitter_MaxRatedPowerCell":{},
     "transCellSplitter_Minimal_SOC":{},
     "hydrogenTank_Tempurature" :{"dispName":"Hydrogen Tank Tempurature (K)", "type":"int", "message":"Hydrogen tank tempurature in K"},

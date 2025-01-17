@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useSyncExternalStore} from "react";
 import { useState } from "react";
 import axios from "axios";
 import { ModelInfoContext, ParameterContext } from "../App";
@@ -10,6 +10,10 @@ const Optimisation = ()=>{
     const [curStep, setCurStep] = useState(0);
     const [cosntParam, setConstParam] = useState("");
     const [constParamVal, setConstparamVal]= useState(0);
+    const [selectPwrTrainOpt, setSelectPwrTrainOpt] = useState(false);
+    const [selectFuelOpt, setSelectFuelOpt] = useState(false);
+    const [selectRouteOpt, setSelectRouteOpt] = useState(false);
+    const [selectDutyCycOpt, setSelectDutyCycOpt] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const [optParamArray, setOptParamArray] = useState([]);
     const [optimisationRes, setOptimisationRes] = useState([]);
@@ -99,58 +103,88 @@ const Optimisation = ()=>{
             return;
         }
     }
-        return (
-            <div className="optimisation-section">
-            <h3>Optimisation</h3>
-            <div className = "constant-parameter-select">
-                <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
-                <select onChange={handleConstParamSelection} value = {cosntParam}>
-                    {parameterOptions()}
-                </select>
-                <input type= "number" placeholder = "Input Values Constant" onChange={e=>setConstparamVal(Number(e.target.value))}/>
-                <button onClick={handleConstParamSubmisstion}>Submit</button>
-            </div>
-            <div className="optimisation-selection">
-                <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
-                <select onChange={handleParameterSelection} value = {curPara}>
-                    {parameterOptions()}
-                </select>
-                <input type="number" placeholder="Input Start Value" onChange={e=>setCurStartVal(Number(e.target.value))}></input>
-                <input type="number" placeholder="Input End Value" onChange={e=>setCurEndVal(Number(e.target.value))}></input>
-                <input type="number" placeholder="Steps" onChange={e=>setCurStep(Number(e.target.value))}></input>
-                <button onClick={handleOptParamSubmisstion}>Submit</button>
-            </div>
-            <div className="optimise-now">
-                <button onClick={handleOptimisation}>Optimise</button>
-            </div>
-            <div className="optimisation-display">
-                <table className="">
-                    <caption> List of Changed Parameters</caption>
-                        <thead>
-                            <tr>
-                                <th>Parameters</th>
-                                <th>Start Value</th>
-                                <th>End Value</th>
-                                <th>Steps</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {optParamArray.map((item, index)=> 
-                                <tr key = {index}>
-                                    <td><label>{item.name}</label></td>
-                                    <td><p>{item.start}</p></td>
-                                    <td><p>{item.stop}</p></td>
-                                    <td><p>{item.step}</p></td>
-                                </tr>
-                            )}
-                        </tbody>
-                </table>
-            </div>
-            <div className="optimisation-plot">
-                <OptimisationPlotter optRes={optimisationRes}></OptimisationPlotter>
-            </div>
-
+    const togglePwrTrainOpt = () =>{setSelectPwrTrainOpt(!selectPwrTrainOpt)}
+    const toggleFuelOpt =()=>{setSelectFuelOpt(!selectFuelOpt)}
+    const toggleRouteOpt = ()=>{setSelectRouteOpt(!selectRouteOpt)}
+    const toggleDutyCycOpt=()=>{setSelectDutyCycOpt(!selectDutyCycOpt)}
+   
+    return (
+        <div className="optimisation-section">
+        <h3>Optimisation</h3>
+        <div className="optimisation-selector">
+            <h4>Select one or more of the following to Optimise</h4>
+            <button style={{backgroundColor: selectFuelOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleFuelOpt}>Fuel Consumption</button>
+            <button style={{backgroundColor: selectPwrTrainOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={togglePwrTrainOpt}>Power Train Component</button>
+            <button style={{backgroundColor: selectDutyCycOpt ? "#e0e3e2" : "initial",color: "black",}} onClick = {toggleDutyCycOpt}>Duty Cyle</button>
+            <button style={{backgroundColor: selectRouteOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleRouteOpt}>Route</button>
+            <div>
+                <p></p>
+            </div>            
         </div>
+        <div className="powertrain-coponent-optimsation">
+            {
+                selectPwrTrainOpt ? (
+                    <div className = "constant-parameter-select">
+                        <h5>Power Tain Configureation Optimisation</h5>
+                        <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
+                        <select onChange={handleConstParamSelection} value = {cosntParam}>
+                            {parameterOptions()}
+                        </select>
+                        <input type= "number" placeholder = "Input Values Constant" onChange={e=>setConstparamVal(Number(e.target.value))}/>
+                        <button onClick={handleConstParamSubmisstion}>Submit</button>
+                    </div>
+                ):null      
+            }
+            {
+                selectPwrTrainOpt ? (
+                    <div className="optimisation-selection">
+                        <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
+                        <select onChange={handleParameterSelection} value = {curPara}>
+                            {parameterOptions()}
+                        </select>
+                        <input type="number" placeholder="Input Start Value" onChange={e=>setCurStartVal(Number(e.target.value))}></input>
+                        <input type="number" placeholder="Input End Value" onChange={e=>setCurEndVal(Number(e.target.value))}></input>
+                        <input type="number" placeholder="Steps" onChange={e=>setCurStep(Number(e.target.value))}></input>
+                        <button onClick={handleOptParamSubmisstion}>Submit</button>
+                    </div>
+                ):null
+            }
+            
+            
+        </div>
+        
+        <div className="optimise-now">
+            <button onClick={handleOptimisation}>Batch Simulation</button>
+        </div>
+        <div className="optimisation-display">
+            <table className="">
+                <caption> List of Changed Parameters</caption>
+                    <thead>
+                        <tr>
+                            <th>Parameters</th>
+                            <th>Start Value</th>
+                            <th>End Value</th>
+                            <th>Steps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {optParamArray.map((item, index)=> 
+                            <tr key = {index}>
+                                <td><label>{item.name}</label></td>
+                                <td><p>{item.start}</p></td>
+                                <td><p>{item.stop}</p></td>
+                                <td><p>{item.step}</p></td>
+                            </tr>
+                        )}
+                    </tbody>
+            </table>
+        </div>
+           
+        <div className="optimisation-plot">
+            <OptimisationPlotter optRes={optimisationRes}></OptimisationPlotter>
+        </div>
+                            
+    </div>
     )
 }
 export default Optimisation;

@@ -15,12 +15,8 @@ const ParameterList =(props)=>{
         }
     });
     const changeParameter = (parameterName)=>{
-        console.log(changedParameters);
-        const trimmedparameterName = parameterName.replace(/^"|"$/g,'');
-        const inputValue = document.getElementById(parameterName).value;
-        const newItem = {param:trimmedparameterName, value:inputValue};
-        console.log("New Change in Parameter Registered");
-        updateChangedParametersArray(newItem);
+        console.log({param:parameterName.replace(/^"|"$/g,''), value:document.getElementById(parameterName).value});
+        updateChangedParametersArray({param:parameterName.replace(/^"|"$/g,''), value:document.getElementById(parameterName).value})
     };
     
     return(

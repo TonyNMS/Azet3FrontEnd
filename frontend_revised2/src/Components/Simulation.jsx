@@ -15,7 +15,8 @@ const Simulation =()=>{
     const [checkedInterval, setCheckInterval] = useState(false);
     const [avalibleSimDetails, setAvalibleSimDetail] = useState([]);
     const [simulatioName, setSimulationName] = useState('');
-
+    const [openAdvOption, setopenAdvOption] = useState(false);
+    const [openHybOption, setOpenHyboption] = useState(false);
     let inputHandeler =(e)=>{
         setInputText(e.target.value);
     };
@@ -25,33 +26,65 @@ const Simulation =()=>{
     const handelSimulationName = (e)=>{
         result.some(item=>item.param === e)? alert("Input Name Exist, Use Another One") : setSimulationName(e);
     }
+    const renderAdvanceOption =()=>{
+        return (
+        openAdvOption ? (
+             (
+                <>
+                    <button value = {0} onClick={(e)=>changePriorityParam(e)}>Fuel Cell Priority</button>
+                    <button value = {1} onClick={(e)=>changePriorityParam(e)}>Diesel Generator Prioroity</button>
+                    <button value = {2} onClick={toggleConstHybBtn}>Constant Hybrid Options</button>
+                </>
+            )
+        ): null)
+    }
+    const renderHybridoptions =()=>{
+        return (
+            openHybOption ? (
+                <>  
+                    <div><input type="number" placeholder="% share of Load Power for Generator"></input></div>
+                    <div><input type="number" placeholder="% share of Load Power for Fuel Cell"></input></div>
+                </>
+            ): null)
+    }
+    const handleRecordingSimParam  = () =>{
+        setAvalibleSimDetail([...avalibleSimDetails, {"name":simulatioName, "changedParam":changedParameters}]);
+    }
     const handelSimulation =()=>{
         if(modelName ==='' || simulatioName ===''){
             alert("Can not proceed simulation: Model Name or Simulation Name not exist, or Simulation Name exist already");
             return;
         }else{
+            handleRecordingSimParam();
             axios.post('http://127.0.0.1:5000/model/simulate', {
                 model_name : modelName,
                 overrides : changedParameters
             }).then(response =>{
                 updateResultCollection({"sim_name" :simulatioName, "data":response.data.result});
-                setAvalibleSimDetail([...avalibleSimDetails, {"name":modelName, "changedParam":changedParameters }]);
                 console.log("simulation successful");
             }).catch(error=>{
                 console.log('Error During Simulation:', error);
                 alert(`Simualtion Failed, Check the following error, ${error}`)
             });
         }
-        
         resetChangedParameterArray();
         setSimulationName('');
     };
     const changeParameter = (parameterName)=>{
-        const inputValue = document.getElementById(parameterName).value;
-        const newItem = {param:parameterName, value:inputValue};
-        console.log("New Change in Parameter Registered");
-        updateChangedParametersArray(newItem);
+        console.log("New Change in SimParameter Registered");
+        updateChangedParametersArray({param:parameterName, value: document.getElementById(parameterName).value,})
     };
+    const changePriorityParam = (priorityValue)=>{
+        console.log("New Change in PoriorityParameter Registered");
+        updateChangedParametersArray({param:"mCtlr_PirorityAssignement", value:priorityValue.target.value});
+    };
+    const togglePiroBtn = ()=>{setopenAdvOption(!openAdvOption)};
+    const toggleConstHybBtn = ()=>{setOpenHyboption(!openHybOption)};
+
+    const testSimParamRecord = [
+        {"name":"Sim1", "changedParam":[{param:"param1", value:1},{param:"param2", value:2}]},
+        {"name":"Sim2", "changedParam":[{param:"param3", value:3},{param:"param4", value:4}]}
+    ]
     return(
         <div>
             <div className="component-param">
@@ -64,6 +97,11 @@ const Simulation =()=>{
                     <button value={"hydrogen_tank"} onClick={e=>inputHandeler(e)}>Hydrogen Tank</button>
                     <button value={"battery"} onClick={e=>inputHandeler(e)}>Battery</button>
                     <button value={""} onClick={e=>inputHandeler(e)}> Show All</button>
+                </div>
+                <div className = "advance-option">
+                    <button onClick={togglePiroBtn}>Priority Assignment</button>
+                    {renderAdvanceOption()}
+                    {renderHybridoptions()}
                 </div>
                 <div className ="search">
                     <input type ='search' onChange = {inputHandeler} placeholder="Search a Parameter"></input>
@@ -113,7 +151,7 @@ const Simulation =()=>{
                 </div>
             </div>
             <div className = "selected-param-container">
-                <h5>List of Modified Parameter</h5>
+                <h4>List of Modified Parameter</h4>
                 <table className = "list-container">
                     <caption> List of Changed Parameters</caption>
                     <thead>
@@ -133,19 +171,28 @@ const Simulation =()=>{
                 </table>
             </div>
             <div className = "sim-param-record">
-                <h5>Record of Previous Simulation</h5>
-                <caption>List of Previous Simulation</caption>
-                <thead><tr><th>Simulation Name</th><th>Changed Parameter</th><th>Assigned Vaule</th></tr></thead>
-                <tbody>
-                    {avalibleSimDetails.map((item, index)=>{
-                        <tr key={`avalible-sim-${index}`}>
-                            <td><label>{item.name}</label></td>
-                            {item.changedParam.map((i, index)=>{
-                                
-                            })}
-                        </tr>
-                    })}
-                </tbody>
+                <h4>Record of Previous Simulation</h4>
+                
+                <table className = "list-container">
+                    <caption>List of Previous Simulation</caption>
+                    <thead><tr><th>Simulation Name</th><th>Changed Parameter</th><th>Assigned Vaule</th></tr></thead>
+                    <tbody>
+                        {testSimParamRecord.map((item, index) =>
+                            item.changedParam.map((param, paramIndex) => (
+                                <tr key={`sim-${index}-param-${paramIndex}`}>
+                                    {/* Render Simulation Name only for the first parameter */}
+                                    {paramIndex === 0 && (
+                                        <td rowSpan={item.changedParam.length}>
+                                            <label>{item.name}</label>
+                                        </td>
+                                    )}
+                                    <td>{param.param}</td>
+                                    <td>{param.value}</td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
             </div>
             <div className="sim-button-container">
                 <label>Name Your Simulation</label>
