@@ -25,10 +25,10 @@
     "fuelCell_A_cell":{"dispName":"Fuel Cell Membrane Surface Area", "type":"float", "message":"Surface area of a single fuel cell"},
     "fuelCell_n_cell":{"dispName":"Fuel Cell Count", "type":"int", "message":"Amount of Fuel Cell in the Stack"},
     "fuelCell_eta":{"dispName":"Fuel Cell Effciency", "type":"float", "message":"Fuel Cell Effciency in percentage"},
-    "fuelCell_control_power":{"dispName":"", "type":"", "message":""},
+    "fuelCell_Pwr_band_count":{"dispName":"Fuel Cell Power Band Count", "type":"integer", "message": "Number of discrete power output for fuelcell"},
 
-    "generator_V_flow_Frat":{"dispName":"", "type":"", "message":""},
-    "generator_V_flow_Fidle":{"dispName":"", "type":"", "message":""},
+    "generator_V_flow_Fidle":{"dispName":"Generator Idle Fuel Flow", "type":"float", "message":"Fuel Flow when Generator Is Idle"},
+    "generator_V_flow_Frat":{"dispName":"Generator Peak Operation Fuel Flow", "type":"float", "message":"Fuel Flow when Generator is maxed out"},
     "generator_Use_Const_Off":{"dispName":"", "type":"", "message":""},
     "generator_Eta_El_Const":{"dispName":"", "type":"", "message":""},
     "generator_FuelConsumptionIsVolumetric":{"dispName":"", "type":"", "message":""},

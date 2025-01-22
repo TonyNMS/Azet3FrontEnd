@@ -17,6 +17,8 @@ const Simulation =()=>{
     const [simulatioName, setSimulationName] = useState('');
     const [openAdvOption, setopenAdvOption] = useState(false);
     const [openHybOption, setOpenHyboption] = useState(false);
+    const [openFuelOption, setopenFuelOption] = useState(false);
+    const [openCustomFuelOption, setOpenCustomFuelOption] = useState(false);
     let inputHandeler =(e)=>{
         setInputText(e.target.value);
     };
@@ -46,6 +48,32 @@ const Simulation =()=>{
                     <div><input type="number" placeholder="% share of Load Power for Fuel Cell"></input></div>
                 </>
             ): null)
+    }
+    const renderFuelOptions = () =>{
+        return(
+            openFuelOption ? (
+                <>
+                    <select></select>
+                    <button>Custom Fuel</button>
+                </>
+            ):null
+        )
+    }
+    const renderCustomFuelOptions = () =>{
+        return(
+            openCustomFuelOption ? (
+                <>
+                    <label>Fuel LHV</label>
+                    <input></input>
+                    <label>Fuel Density</label>
+                    <input></input>
+                    <label>Fuel Liquid Density</label>
+                    <input></input>
+                    <label></label>
+                    <input></input>
+                </>
+            ):null
+        )
     }
     const handleRecordingSimParam  = () =>{
         setAvalibleSimDetail([...avalibleSimDetails, {"name":simulatioName, "changedParam":changedParameters}]);
@@ -89,14 +117,17 @@ const Simulation =()=>{
         <div>
             <div className="component-param">
                 <h4>All Componenet Parameters</h4>
-                <div className = "quick_access_panel">
-                    <button value={"generator"} onClick={e=>inputHandeler(e)}>Generator</button>
-                    <button value={"fuel_"} onClick={e=>inputHandeler(e)}>Fuel</button>
-                    <button value={"fuelCell"} onClick={e=>inputHandeler(e)}>FuelCell</button>
-                    <button value={"fuel_tank"} onClick={e=>inputHandeler(e)}>Fuel Tank</button>
-                    <button value={"hydrogen_tank"} onClick={e=>inputHandeler(e)}>Hydrogen Tank</button>
-                    <button value={"battery"} onClick={e=>inputHandeler(e)}>Battery</button>
-                    <button value={""} onClick={e=>inputHandeler(e)}> Show All</button>
+                    <div className = "quick_access_panel">
+                        <button value={"generator"} onClick={e=>inputHandeler(e)}>Generator</button>
+                        <button value={"fuel_"} onClick={e=>inputHandeler(e)}>Fuel</button>
+                        <button value={"fuelCell"} onClick={e=>inputHandeler(e)}>FuelCell</button>
+                        <button value={"fuel_tank"} onClick={e=>inputHandeler(e)}>Fuel Tank</button>
+                        <button value={"hydrogen_tank"} onClick={e=>inputHandeler(e)}>Hydrogen Tank</button>
+                        <button value={"battery"} onClick={e=>inputHandeler(e)}>Battery</button>
+                        <button value={""} onClick={e=>inputHandeler(e)}> Show All</button>
+                    </div>
+                <div className="fuel-option">
+
                 </div>
                 <div className = "advance-option">
                     <button onClick={togglePiroBtn}>Priority Assignment</button>
@@ -111,7 +142,7 @@ const Simulation =()=>{
 
             <div className="sim-param">
                 <h4>Simulation Parameters Section</h4>
-                <div className = "toggle-slider">
+                <div className = "toggletestSimParamRecord-slider">
                     <p>Set Interval</p>
                     <input type = "checkbox" id = "toggle" checked = {checkedInterval} onChange={handleToggleInterval}/>
                     <label htmlFor = "toggle" className = "slider"></label>
@@ -180,7 +211,7 @@ const Simulation =()=>{
                         {testSimParamRecord.map((item, index) =>
                             item.changedParam.map((param, paramIndex) => (
                                 <tr key={`sim-${index}-param-${paramIndex}`}>
-                                    {/* Render Simulation Name only for the first parameter */}
+
                                     {paramIndex === 0 && (
                                         <td rowSpan={item.changedParam.length}>
                                             <label>{item.name}</label>

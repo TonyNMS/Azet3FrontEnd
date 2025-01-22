@@ -1,0 +1,91 @@
+.optimisation-section {
+    text-align: center;
+}
+
+.optimisation-section table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+    border: 1px solid #ccc;
+}
+
+.optimisation-section th, 
+.optimisation-section td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.optimisation-section caption {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.optimisation-section input, 
+.optimisation-section select, 
+.optimisation-section button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+/* Specific button styling for the optimisation selector */
+.optimisation-section .optimisation-selector button {
+    background-color: #e0e3e2;
+    border: 1px solid #ccc;
+    color: black;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.optimisation-section .optimisation-selector button:hover {
+    border-color: #333;
+}
+
+.optimisation-section .optimisation-selector button:active {
+    background-color: #d0d3d2;
+}
+.fuel-optimisation-selection button{
+    background-color: #28a745;
+    color: white;
+    border: black;
+}
+.fuel-optimisation-selection button:hover{
+    background-color: #056e1c;
+}
+.submition {
+    background-color: cornflowerblue;
+    color:white;
+    border: black;
+}
+.submition:hover{
+    background-color: rgb(6, 136, 211);
+}
+.optimisation-description p {
+    font-size: 1.2em;
+    font-style: italic;
+    background-color: #e7f3fe;
+    padding: 15px;
+    border-left: 5px solid #007BFF;
+    margin-bottom: 20px;
+}
+
+.optimisation-section {
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Improve section titles */
+.optimisation-section h3 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}

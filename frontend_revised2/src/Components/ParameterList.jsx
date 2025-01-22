@@ -2,7 +2,6 @@ import React, {useContext} from "react";
 import { ChangedParameterContext, ParameterContext, UpdateChangedParameterContext } from "../App";
 const ParameterList =(props)=>{
     const parameters = useContext(ParameterContext);
-    const changedParameters = useContext(ChangedParameterContext);
     const updateChangedParametersArray = useContext(UpdateChangedParameterContext);
     const parameterListObject = parameters.map((parameter, index)=>(
         {"id": index, "param": parameter}
