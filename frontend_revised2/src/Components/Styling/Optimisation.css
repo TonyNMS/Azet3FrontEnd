@@ -5,10 +5,9 @@
 .optimisation-section table {
     margin: auto;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     border: 1px solid #ccc;
 }
-
 .optimisation-section th, 
 .optimisation-section td {
     border: 1px solid #ccc;
@@ -16,6 +15,18 @@
     text-align: center;
 }
 
+.optimisation-section .opt-parameter-select-table th, 
+.optimisation-section .opt-parameter-select-table td {
+    border: 1px solid transparent;
+    padding: 10px;
+    text-align: center;
+}
+.optimisation-section .opt-parameter-select-table table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 90%;
+    border: 1px solid transparent;
+}
 .optimisation-section caption {
     font-size: 1.5em;
     font-weight: bold;
@@ -29,6 +40,36 @@
     padding: 10px;
     border: 1px solid #ccc;
     font-size: 1em;
+}
+.optimisation-section .powertrain-coponent-optimsation input, 
+.optimisation-section .powertrain-coponent-optimsation select, 
+.optimisation-section .powertrain-coponent-optimsation button {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    
+}
+.powertrain-coponent-optimsation .opt-parameter-select-table input, 
+.powertrain-coponent-optimsation .opt-parameter-select-table select, 
+.powertrain-coponent-optimsation .opt-parameter-select-table button {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    width: 90%;
+    
+}
+.powertrain-coponent-optimsation .batch-simulate-now button{
+    margin: 5px;
+    padding: 12px 20px;
+    background-color: cornflowerblue;
+    color: white;
+    border: 1px solid #080808;
+    font-size: 1em;
+}
+.powertrain-coponent-optimsation .batch-simulate-now button:hover{
+    background-color: rgb(6, 136, 211);
 }
 
 /* Specific button styling for the optimisation selector */
@@ -48,6 +89,7 @@
 .optimisation-section .optimisation-selector button:active {
     background-color: #d0d3d2;
 }
+
 .fuel-optimisation-selection button{
     background-color: #28a745;
     color: white;
@@ -81,6 +123,7 @@
     border-radius: 10px;
     background-color: #f9f9f9;
 }
+
 
 /* Improve section titles */
 .optimisation-section h3 {

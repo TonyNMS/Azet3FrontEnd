@@ -203,12 +203,11 @@ const Simulation =()=>{
             </div>
             <div className = "sim-param-record">
                 <h4>Record of Previous Simulation</h4>
-                
                 <table className = "list-container">
                     <caption>List of Previous Simulation</caption>
                     <thead><tr><th>Simulation Name</th><th>Changed Parameter</th><th>Assigned Vaule</th></tr></thead>
                     <tbody>
-                        {testSimParamRecord.map((item, index) =>
+                        {avalibleSimDetails.map((item, index) =>
                             item.changedParam.map((param, paramIndex) => (
                                 <tr key={`sim-${index}-param-${paramIndex}`}>
 

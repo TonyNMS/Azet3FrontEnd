@@ -17,16 +17,54 @@ const Optimisation = ()=>{
     const [selectRouteOpt, setSelectRouteOpt] = useState(false);
     const [selectDutyCycOpt, setSelectDutyCycOpt] = useState(false);
     const [selectCustomFuel, setSelecteCustomFuel] = useState(false);
-    const [searchInput, setSearchInput] = useState("");
+    const [toggleChangedParamTable, setToggleChangedParamTable] = useState(false);
+    const [togglePrevOptTable, setTogglePrevOptTable] = useState(false);
+    const [searchInputConst, setSearchInputConst] = useState("");
+    const [searchInputOpt, setSearchInputOpt] = useState("");
     const [optParamArray, setOptParamArray] = useState([]);
     const [optimisationRes, setOptimisationRes] = useState([]);
     const parameters = useContext(ParameterContext);
     const modelName = useContext(ModelInfoContext);
     const [optResParamRecord, setOptResParamRecord] = useState([]);
     const fuelTypeArray = ["Liquified Hydrogen", "Marine Diesel", "Bio Diesel", "Methan", "Ammonia"];
-    const parameterOptions = ()=>{
-        return parameters.length > 0 ? (
-            [<option key = {'opt-param-placeholde'} value={null}>Select a Parameter</option>, ...parameters.map(
+    
+    const handleParameterSelection = (e)=>{
+        setrCurParam(e.target.value);
+    }
+    const handleConstParamSelection = (e)=>{
+        setConstParam(e.target.value);
+    }   
+    
+    const filteredListConstParam = parameters.filter(
+        (el)=>{
+            if(searchInputConst === ""){
+                return el;
+            }else{
+                return el.includes(searchInputConst);
+            }
+        }
+    )
+    const filtereListOptParam = parameters.filter(
+        (el)=>{
+            if(searchInputOpt ===""){
+                return el
+            }else{
+                return el.includes(searchInputOpt);
+            }
+        }
+    )
+    let searchConstInputHandeler = (e) =>{
+        console.log(filteredListConstParam)
+        setSearchInputConst(e.target.value);
+    }
+    let searchOptInputHandeler =(e) =>{
+        console.log(parameters)
+        setSearchInputOpt(e.target.value);
+    }
+    
+    const parameterConstOptions = ()=>{
+        return filteredListConstParam.length > 0 ? (
+            [<option key = {'opt-param-placeholde'} value={null}>Select a Parameter</option>, ...filteredListConstParam.map(
                 (item, index)=> (<option key={`opt-param-${index}`} value={item.replaceAll("\"", "")} >
                     {item.replaceAll("\"", "")}
                 </option>)
@@ -35,14 +73,16 @@ const Optimisation = ()=>{
             <option key={'opt-param-no_sim'}>No Parameters Loaded</option>
         )
     }
-    const handleParameterSelection = (e)=>{
-        setrCurParam(e.target.value);
-    }
-    const handleConstParamSelection = (e)=>{
-        setConstParam(e.target.value);
-    }
-    const searchInputHandeler = (e) =>{
-        setSearchInput(e.target.value);
+    const parameterOptOptions = ()=>{
+        return filtereListOptParam.length > 0 ? (
+            [<option key = {'opt-param-placeholde'} value={null}>Select a Parameter</option>, ...filtereListOptParam.map(
+                (item, index)=> (<option key={`opt-param-${index}`} value={item.replaceAll("\"", "")} >
+                    {item.replaceAll("\"", "")}
+                </option>)
+            )]
+        ):(
+            <option key={'opt-param-no_sim'}>No Parameters Loaded</option>
+        )
     }
     const handleOptParamSubmisstion= ()=>{
         console.log(curPara)
@@ -59,8 +99,8 @@ const Optimisation = ()=>{
         }
     }
     const handleConstParamSubmisstion= ()=>{
-        console.log(curPara)
-        if (curPara !== ""){
+        console.log(cosntParam)
+        if (cosntParam !== ""){
             setOptParamArray([...optParamArray, {
                 "name" : cosntParam,
                 "start": constParamVal,
@@ -118,7 +158,7 @@ const Optimisation = ()=>{
                 params : optParamArray
             }).then(response=>{
                 const temnParamArray = optParamArray;
-                setOptResParamRecord([...optResParamRecord, {"optName":`Batch Optimisation ${optResParamRecord.length+1}`, "changedPara": optParamArray}])
+                setOptResParamRecord([...optResParamRecord, {"optName":`Batch Simulation ${optResParamRecord.length+1}`, "changedPara": optParamArray}])
                 setOptimisationRes(response.data.results);
                 setOptParamArray([]);
                 
@@ -164,6 +204,12 @@ const Optimisation = ()=>{
         setSelectFuelOpt(false);
 
     };
+    const toggleChangedParamTab = () =>{
+        setToggleChangedParamTable(!toggleChangedParamTable)
+    }
+    const togglePrevOptTab = () =>{
+        setTogglePrevOptTable(!togglePrevOptTable)
+    }
     const toggleCustomFuel =()=>{setSelecteCustomFuel(!selectCustomFuel)};
     return (
         <div className="optimisation-section">
@@ -185,7 +231,15 @@ const Optimisation = ()=>{
                 ):null
             }
             {
-                selectPwrTrainOpt? (
+               selectPwrTrainOpt?(
+                    <div className="optimisation-record-toggle">
+                        <button onClick={toggleChangedParamTab}>Toggle Changed Parameter Table</button>
+                        <button onClick={togglePrevOptTab}>Toggle Previous Run Record</button>
+                    </div>
+               ):null 
+            }
+            {
+                selectPwrTrainOpt&&toggleChangedParamTable? (
                     <div className="powertrain-optimisation-display">
                         <table className="changed-parameters">
                             <caption> List of Changed Parameters</caption>
@@ -208,36 +262,37 @@ const Optimisation = ()=>{
                                     )}
                                 </tbody>
                         </table>
-                        {previousOptRecord()}
+                        {togglePrevOptTable? previousOptRecord(): null}
                     </div>
                 ):null
             }
+
             {
-                selectPwrTrainOpt ? (
-                    <div className = "constant-parameter-select">
-                        <h5>Power Tain Configureation Optimisation</h5>
-                        <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
-                        <select onChange={handleConstParamSelection} value = {cosntParam}>
-                            {parameterOptions()}
-                        </select>
-                        <input type= "number" placeholder = "Input Values Constant" onChange={e=>setConstparamVal(Number(e.target.value))}/>
-                        <button onClick={handleConstParamSubmisstion} className="submition">Submit</button>
+                selectPwrTrainOpt? (
+                    <div className = "opt-parameter-select-table">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" placeholder="Search a Parameter" onChange={searchConstInputHandeler}></input></td>
+                                    <td><select onChange={handleConstParamSelection} value = {cosntParam}>{parameterConstOptions()}</select></td>
+                                    <td><input type= "number" placeholder = "Input Values Constant" onChange={e=>setConstparamVal(Number(e.target.value))}/></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button onClick={handleConstParamSubmisstion} className="submition">Submit</button></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="Search a Parameter" onChange={searchOptInputHandeler}></input></td>
+                                    <td><select onChange={handleParameterSelection} value = {curPara}>{parameterOptOptions()}</select></td>
+                                    <td><input type="number" placeholder="Input Start Value" onChange={e=>setCurStartVal(Number(e.target.value))}></input></td>
+                                    <td><input type="number" placeholder="Input End Value" onChange={e=>setCurEndVal(Number(e.target.value))}></input></td>
+                                    <td><input type="number" placeholder="Steps" onChange={e=>setCurStep(Number(e.target.value))}></input></td>
+                                    <td><button onClick={handleOptParamSubmisstion} className="submition">Submit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                ):null      
+                ):null
             }
-            {
-                selectPwrTrainOpt ? (
-                    <div className="optimisation-selection">
-                        <input type="search" placeholder="Search a Parameter" onChange={searchInputHandeler}></input>
-                        <select onChange={handleParameterSelection} value = {curPara}>
-                            {parameterOptions()}
-                        </select>
-                        <input type="number" placeholder="Input Start Value" onChange={e=>setCurStartVal(Number(e.target.value))}></input>
-                        <input type="number" placeholder="Input End Value" onChange={e=>setCurEndVal(Number(e.target.value))}></input>
-                        <input type="number" placeholder="Steps" onChange={e=>setCurStep(Number(e.target.value))}></input>
-                        <button onClick={handleOptParamSubmisstion} className="submition">Submit</button>
-                    </div>
-                ):null}
             {
                 selectPwrTrainOpt ? (
                     <div className="batch-simulate-now">
