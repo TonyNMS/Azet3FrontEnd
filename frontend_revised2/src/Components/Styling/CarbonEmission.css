@@ -1,0 +1,9 @@
+.fuel_state_description, .custom_fuel_description, .mini_pwr_description, .carbon-calc-description p{
+    font-size: 0.8em;
+    font-style: italic;
+    background-color: #a2c9bc;
+    padding: 15px;
+    border-right: 5px solid #40a845;
+    margin-bottom: 20px;
+}
+

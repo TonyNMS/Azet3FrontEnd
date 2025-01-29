@@ -66,7 +66,7 @@ const Plotter =()=>{
         );
     }
     const handleCurrentSimulationSelection = (e)=>{
-        // if a simulation name is choosed, then we get ready corresponding data for the other selectors
+        // if a simulation name is chosen, then we  ready corresponding data for the other selectors
         setCurrentSimName(e);
         const selectedData = formatedResCollection.find((item) => item.name === e)?.data;
         const selectedTitles = formatedTitlesCollection.find((item) => item.name === e)?.titles;    

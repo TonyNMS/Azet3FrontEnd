@@ -5,6 +5,7 @@ import { ModelInfoContext, ParameterContext } from "../App";
 import OptimisationPlotter from "./OptimisationPlotter";
 import "./Styling/Optimisation.css"
 import OptimisationFinancialSummary from "./OptimisationFinancialSummary";
+import CarbonEmission from "./Optimisation/CarbonEmission";
 const Optimisation = ()=>{
     const [curPara, setrCurParam] = useState("");
     const [curStartVal,setCurStartVal] = useState(0);
@@ -16,6 +17,7 @@ const Optimisation = ()=>{
     const [selectFuelOpt, setSelectFuelOpt] = useState(false);
     const [selectRouteOpt, setSelectRouteOpt] = useState(false);
     const [selectDutyCycOpt, setSelectDutyCycOpt] = useState(false);
+    const [selectCarbonEmisOpt, setSelectCarbonEmisOpt] = useState(false);
     const [selectCustomFuel, setSelecteCustomFuel] = useState(false);
     const [toggleChangedParamTable, setToggleChangedParamTable] = useState(false);
     const [togglePrevOptTable, setTogglePrevOptTable] = useState(false);
@@ -54,11 +56,9 @@ const Optimisation = ()=>{
         }
     )
     let searchConstInputHandeler = (e) =>{
-        console.log(filteredListConstParam)
         setSearchInputConst(e.target.value);
     }
     let searchOptInputHandeler =(e) =>{
-        console.log(parameters)
         setSearchInputOpt(e.target.value);
     }
     
@@ -183,18 +183,21 @@ const Optimisation = ()=>{
         setSelectDutyCycOpt(false);
         setSelectFuelOpt(false);
         setSelectRouteOpt(false);
+        setSelectCarbonEmisOpt(false);
     };
     const toggleDutyCycOpt=()=>{
         setSelectDutyCycOpt(!selectDutyCycOpt);
         setSelectFuelOpt(false);
         setSelectPwrTrainOpt(false);
         setSelectRouteOpt(false);
+        setSelectCarbonEmisOpt(false);
     };
     const toggleFuelOpt =()=>{
         setSelectFuelOpt(!selectFuelOpt);
         setSelectPwrTrainOpt(false);
         setSelectDutyCycOpt(false);
         setSelectRouteOpt(false);
+        setSelectCarbonEmisOpt(false);
 
     };
     const toggleRouteOpt =()=>{
@@ -202,14 +205,18 @@ const Optimisation = ()=>{
         setSelectPwrTrainOpt(false);
         setSelectDutyCycOpt(false);
         setSelectFuelOpt(false);
+        setSelectCarbonEmisOpt(false);
 
     };
-    const toggleChangedParamTab = () =>{
-        setToggleChangedParamTable(!toggleChangedParamTable)
+    const toggleCarbonEmisOpt = () =>{
+        setSelectCarbonEmisOpt(!selectCarbonEmisOpt);
+        setSelectRouteOpt(false);
+        setSelectPwrTrainOpt(false);
+        setSelectDutyCycOpt(false);
+        setSelectFuelOpt(false);
     }
-    const togglePrevOptTab = () =>{
-        setTogglePrevOptTable(!togglePrevOptTable)
-    }
+    const toggleChangedParamTab = () =>{setToggleChangedParamTable(!toggleChangedParamTable)}
+    const togglePrevOptTab = () =>{setTogglePrevOptTable(!togglePrevOptTable)}
     const toggleCustomFuel =()=>{setSelecteCustomFuel(!selectCustomFuel)};
     return (
         <div className="optimisation-section">
@@ -219,7 +226,8 @@ const Optimisation = ()=>{
             <button style={{backgroundColor: selectFuelOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleFuelOpt}>Fuel Consumption</button>
             <button style={{backgroundColor: selectPwrTrainOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={togglePwrTrainOpt}>Power Train Component</button>
             <button style={{backgroundColor: selectDutyCycOpt ? "#e0e3e2" : "initial",color: "black",}} onClick = {toggleDutyCycOpt}>Duty Cyle</button>
-            <button style={{backgroundColor: selectRouteOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleRouteOpt}>Route</button>         
+            <button style={{backgroundColor: selectRouteOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleRouteOpt}>Route</button>
+            <button style={{backgroundColor: selectCarbonEmisOpt ? "#e0e3e2" : "initial",color: "black",}} onClick={toggleCarbonEmisOpt}>Carbon Emission</button>         
         </div>
         <div className="powertrain-coponent-optimsation">
             {
@@ -308,7 +316,7 @@ const Optimisation = ()=>{
             {
                 selectPwrTrainOpt?(
                     <table className="pwr-train-optisation-summarytable">
-                            <caption>Power train Optimisation Summary Table</caption>
+                                <caption>Power train Optimisation Summary Table</caption>
                                 <thead>
                                     <tr>
                                         <th>Current Expense per Voyage</th>
@@ -318,15 +326,7 @@ const Optimisation = ()=>{
                                         <th>Optimised Sum Expense Projection 10 Years</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+                                <tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody>
                     </table>
                 ):null}
         </div>
@@ -347,12 +347,16 @@ const Optimisation = ()=>{
                         selectCustomFuel ? (
                             <div>
                                 <div className="custome=fuel-prop">
-                                    <label>Fuel LHV</label><input type="number" placeholder="Fuel LHV"/>
-                                    <label>Fuel Density</label><input type="number" placeholder="Density"/>
-                                    <label>Fuel Liquid Density</label><input type="number" placeholder="Liquid Density"/>
-                                    <label>Fuel Carbon Content</label><input type="number" placeholder="Liquid Carbon Content"/>
-                                    <label>Fuel Molar Mass</label><input type="number" placeholder="Molar Mass"/>
-                                    <label>Fuel Molar Energy</label><input type="number" placeholder="Molar Energy"/>
+                                    <table>
+                                        <tbody>
+                                            <tr><td><label>Fuel LHV</label></td><td><input type="number" placeholder="Fuel LHV"/></td></tr>
+                                            <tr><td><label>Fuel Density</label></td><td><input type="number" placeholder="Density"/></td></tr>
+                                            <tr><td><label>Fuel Liquid Density</label></td><td><input type="number" placeholder="Liquid Density"/></td></tr>
+                                            <tr><td><label>Fuel Carbon Content</label></td><td><input type="number" placeholder="Liquid Carbon Content"/></td></tr>
+                                            <tr><td><label>Fuel Molar Mass</label></td><td><input type="number" placeholder="Molar Mass"/></td></tr>
+                                            <tr><td><label>Fuel Molar Energy</label></td><td><input type="number" placeholder="Molar Energy"/></td></tr>
+                                        </tbody>
+                                    </table>
                                     
                                 </div>
                                 <button className="submition">Submit</button>
@@ -393,15 +397,7 @@ const Optimisation = ()=>{
                                 <th>Optimised Sum Expense Projection 10 Years</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        <tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody>
                 </table>
             ):null}
         </div>
@@ -429,8 +425,8 @@ const Optimisation = ()=>{
             ):null}
             {selectDutyCycOpt? (
                 <table className="dutycycle-optisation-summarytable">
-                    <caption>Duty Cycle Optimisation Summary Table</caption>
-                        <thead>
+                        <caption>Duty Cycle Optimisation Summary Table</caption>
+                        <thead> 
                             <tr>
                                 <th>Current Expense per Voyage</th>
                                 <th>Sum Expense Projection 5 Years</th>
@@ -490,18 +486,17 @@ const Optimisation = ()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <tr><td></td><td></td><td></td><td></td><td></td></tr>
                         </tbody>
                 </table>
             ):null}
         </div>
-        <OptimisationFinancialSummary></OptimisationFinancialSummary>           
+        <div className="co2-emission-tracking">
+            {selectCarbonEmisOpt ? (
+                <CarbonEmission></CarbonEmission>
+            ):null}
+        </div>
+        <OptimisationFinancialSummary></OptimisationFinancialSummary>        
     </div>
     )
 }

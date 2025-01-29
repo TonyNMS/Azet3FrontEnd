@@ -102,9 +102,6 @@ const OptimisationFinancialSummary = () => {
             <button onClick={handleToggle}>Show Summary Table</button>
             {toggleSummaryTable ? (
                 <>
-                    <div className="optimisation-description">
-                        <p>Gross Summary on Modification Expense and Gain</p>
-                    </div>
                     {/*
                     <table className="gross-summary-table">
                         <thead>
@@ -133,11 +130,10 @@ const OptimisationFinancialSummary = () => {
                                 <td>250</td>
                                 <td>90</td>
                                 <td>1</td>
-                         </tr>
+                            </tr>
                         </tbody>
                     </table>*/}
                     <table className="gross-summary-table">
-                       
                         <thead>
                             <tr>
                                 <th>Select</th>
@@ -153,13 +149,14 @@ const OptimisationFinancialSummary = () => {
                         <p>Gross Summary on Modification Expense and Gain</p>
                     </div>
                     <table className="gross-summary-table">
-                        <caption>Finance Summary Table</caption>
+                        <caption>Summary Table</caption>
                         <thead>
-                          
-                            <th>Speed Reduction (%)</th>
-                            <th>CO2 Reduction (%)</th>
-                            <th>CapEx (£)</th>
-                            <th>OpEx (£)</th>
+                            <tr>
+                                <th>Speed Reduction (%)</th>
+                                <th>CO2 Reduction (%)</th>
+                                <th>CapEx (£)</th>
+                                <th>OpEx (£)</th>
+                            </tr>    
                         </thead>
                         <tbody>
                             <tr>

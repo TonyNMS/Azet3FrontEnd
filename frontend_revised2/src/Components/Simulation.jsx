@@ -113,7 +113,7 @@ const Simulation =()=>{
         {"name":"Sim1", "changedParam":[{param:"param1", value:1},{param:"param2", value:2}]},
         {"name":"Sim2", "changedParam":[{param:"param3", value:3},{param:"param4", value:4}]}
     ]
-    return(
+    return( 
         <div>
             <div className="component-param">
                 <h4>All Componenet Parameters</h4>
