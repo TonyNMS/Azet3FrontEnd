@@ -3,6 +3,8 @@ import './App.css'
 import Loading from './Components/Loading';
 import Simulation from './Components/Simulation';
 import Optimisation from './Components/Optimsation';
+import ImageoverLayDisp from './Components/ImageOverLayDisp';
+import CanvasSoultion from './Components/CanvasSoultion';
 
 export const ResultsContext = createContext();
 export const UpdateResultContext = createContext();
@@ -91,6 +93,8 @@ function App() {
                                       <SetDutyCycleString.Provider value={setCSVObject}>
                                         <Loading></Loading>
                                         <Simulation></Simulation>
+                                        <ImageoverLayDisp></ImageoverLayDisp>
+                                        <CanvasSoultion></CanvasSoultion>
                                         <Optimisation></Optimisation>
                                       </SetDutyCycleString.Provider>
                                     </DutyCycleObject.Provider>

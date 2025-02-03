@@ -10,10 +10,10 @@ const PRIORITY_OPTIONS = [
         {"name":"Constant Hybrid", "value" : 2}
 ]
 const INITIAL_FUEL_OPTIONS =[
-    {"type":"Diesel", "props":{"genereator_FLHV":44e6, "genereator_Frho":820, "genereator_Frho_liq":820, "genereator_FcarbonConent":0.86,"generator_MolarMass":0.233}},
+    {"type":"Diesel", "props":{"genereator_FLHV":47e6, "genereator_Frho":820, "genereator_Frho_liq":820, "genereator_FcarbonConent":0.6,"generator_MolarMass":0.233}},
     {"type":"Methanol", "props":{"genereator_FLHV":20.1e6, "genereator_Frho":791.4, "genereator_Frho_liq":791.4, "genereator_FcarbonConent":0.2,"generator_MolarMass":0.03204}},
     {"type":"Natural Gas", "props":{"genereator_FLHV":47.1e6,"genereator_Frho":0.78, "genereator_Frho_liq":422.6, "genereator_FcarbonConent":0.75,"generator_MolarMass":0.01604}},
-    {"type":"Bio Diesel", "props": {"genereator_FLHV": 37.8e6,"genereator_Frho": 920, "genereator_Frho_liq": 920, "genereator_FcarbonConent": 0.87,"generator_MolarMass": 0.292}},
+    {"type":"Bio Diesel", "props": {"genereator_FLHV": 37.8e6,"genereator_Frho": 920, "genereator_Frho_liq": 920, "genereator_FcarbonConent": 0.4,"generator_MolarMass": 0.292}},
     {"type":"Ammonia", "props": {"genereator_FLHV": 18.6e6, "genereator_Frho": 0.86,"genereator_Frho_liq": 682, "genereator_FcarbonConent": 0.0,"generator_MolarMass": 0.01703}}
 ]
 const createFuelOption = (Fname, FLHV, Frho, FliqRho, Fcarbon, FMolarMass) => ({
@@ -93,7 +93,6 @@ const CarbonEmission =()=>{
     }
     const simFlagGenerator =(Fname,LHV, rho,liqRho,carbonContent, molarMass)=>{
         console.log(`Constructing Sim Flag for ${Fname}`)
-
         return [
             {param:"generator_FLHV", value:LHV},
             {param:"generator_Frho", value:rho},
@@ -103,14 +102,15 @@ const CarbonEmission =()=>{
             {param:"mCtlr_PirorityAssignement",value:priorAssign},
             {param:"genreator_P_rat", value:genRatedPwr},
             {param:"hydrogen_tank_SOC_start", value:useFuelCell? H2SOC : 0},
-            {param:"hydrogen_tank_storage", value:useFuelCell? H2Volumn : 0},
+            {param:"hydrogen_tank_storage", value:useFuelCell? H2Volumn : 0.1},
             {param:"battery_SOC_start", value:useBattery? batStartSOC: 0},
-            {param:"battery_Capacity", value:useBattery? batCapacity:0},
+            {param:"battery_Capacity", value:useBattery? batCapacity:0.1},
         ];
     }
     const handleSingleSimulation = (Fname, LHV, rho, liqRho, carbonContent, molarMass) => {
         return new Promise((resolve, reject) => {
             const changedParam = simFlagGenerator(Fname, LHV, rho, liqRho, carbonContent, molarMass);
+            console.log(changedParam);
             setFuelUnderSim(Fname);
             console.log(`Simulation Started for ${Fname}`);
     
@@ -355,7 +355,7 @@ const CarbonEmission =()=>{
                             <td>Generator Rated Power</td>
                             <td><input type="number" placeholder="Generator Rated Power, Default 100kWatt" onChange={handleGenRatedPwr}/ ></td>
                         </tr>
-                        <tr><td>Priority Assignment</td><td><select value= {priorAssign} onChange ={e=>setPrioriAssign(e.target.value)}>{renderPriotiySelectOptions()}</select></td></tr>
+                        <tr><td>Priority Assignment</td><td><select value= {priorAssign} onChange ={e=>setPrioriAssign(Number(e.target.value))}>{renderPriotiySelectOptions()}</select></td></tr>
                         {priorAssign == 2 && (
                             <>
                                 <tr>
