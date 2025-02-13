@@ -5,6 +5,8 @@ import Simulation from './Components/Simulation';
 import Optimisation from './Components/Optimsation';
 import ImageoverLayDisp from './Components/ImageOverLayDisp';
 import CanvasSoultion from './Components/CanvasSoultion';
+import SideMenuBar from './Components/SideMenuBar';
+import Tags from './Components/Tags';
 
 export const ResultsContext = createContext();
 export const UpdateResultContext = createContext();
@@ -23,7 +25,8 @@ export const DutyCycleDataContext = createContext();
 export const SetDutyCycleDataContext = createContext();
 export const DutyCycleObject = createContext();
 export const SetDutyCycleString = createContext();
-
+export const RenderedTagsContext = createContext();
+export const SetRenderedTagsContext = createContext();
 function App() {
   const [resultCollection, setResultCollection] = useState([]);
   const [curModelName, setCurModelName] = useState('');
@@ -33,6 +36,7 @@ function App() {
   const [parameters, setParameteres] = useState([]);
   const [changedParameters, setChangedParameters] = useState([]);
   const [csvString, setCSVString] = useState('');
+  const [renderedTags, setRenderedTags] = useState(['Welcome']);
   const updateResultCollection =(newResult)=>{
     setResultCollection([...resultCollection, newResult]);
   };
@@ -71,7 +75,26 @@ function App() {
   };
   const setCSVObject =(CSVString)=>{
     setCSVString(CSVString);
-  }
+  };
+  const defineRenderedTag =(input)=>{
+    if(renderedTags.includes(input)){
+      const newList = renderedTags.filter(item=>item !==input)
+      console.log(newList);
+      setRenderedTags(renderedTags.filter(item=>item !==input))
+    }else{
+      const newList = [...renderedTags, input]
+      console.log(newList);
+      setRenderedTags([...renderedTags, input])
+    }
+    
+  };
+
+  /**
+   *<Loading></Loading>
+    <Simulation></Simulation>
+    <Optimisation></Optimisation>
+    <iframe src='https://www.wikipedia.org/' title='WebDesign' loading='eager'></iframe>
+   */
   return (
     <>
       <ResultsContext.Provider value = {resultCollection}>
@@ -93,9 +116,17 @@ function App() {
                                       <SetDutyCycleString.Provider value={setCSVObject}>
                                         <Loading></Loading>
                                         <Simulation></Simulation>
-                                        <ImageoverLayDisp></ImageoverLayDisp>
-                                        <CanvasSoultion></CanvasSoultion>
                                         <Optimisation></Optimisation>
+                                        <div className='app-container'>
+                                          <RenderedTagsContext.Provider value ={renderedTags}>
+                                            <SetRenderedTagsContext.Provider value ={defineRenderedTag}>
+                                              <SideMenuBar></SideMenuBar>
+                                              <Tags></Tags>
+                                            </SetRenderedTagsContext.Provider>
+                                          </RenderedTagsContext.Provider>
+                                          
+                                        </div>
+                                        
                                       </SetDutyCycleString.Provider>
                                     </DutyCycleObject.Provider>
                                   </SetDutyCycleDataContext.Provider>

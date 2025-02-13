@@ -1,0 +1,49 @@
+.fuel-consumption-optimisation table{
+  margin: auto;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+.optimisation-description p {
+  font-size: 1.2em;
+  font-style: italic;
+  background-color: #e7f3fe;
+  padding: 15px;
+  border-left: 5px solid #007BFF;
+  margin-bottom: 20px;
+}
+.fuel-consumption-optimisation caption{
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px;
+}
+.fuel-consumption-optimisation th,
+.fuel-consumption-optimisation td{
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.fuel-optimisation-selection button{
+  background-color: #28a745;
+  color: white;
+  border: black;
+}
+.fuel-optimisation-selection button:hover{
+  background-color: #056e1c;
+}
+.submition {
+  background-color: cornflowerblue;
+  color:white;
+  border: black;
+}
+.submition:hover{
+  background-color: rgb(6, 136, 211);
+}
+.fuel-optimisation-selection input,
+.fuel-optimisation-selection select,
+.fuel-optimisation-selection button{
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}

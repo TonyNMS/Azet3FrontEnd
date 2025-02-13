@@ -1,0 +1,159 @@
+.SideMenuBar{
+  text-align: center;
+  width:22.5vw;
+  height: 100vh;
+  top:0px;
+  left:0px;
+  
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 2px;
+  background-color: #F7F7F7;
+  overflow-y:auto ;
+}
+.SidMenuBar-title{
+  width: 100%;
+}
+
+
+/*Vessel Basic Information*/
+.SideMenuBar-vesInfoInput p{
+  font-size: 1.2em;
+  font-style: italic;
+  background-color: #e7f3fe;
+  padding: 15px;
+  border-left: 5px solid #007BFF;
+  margin-bottom: 20px;
+}
+.vessel-info-input{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* Set a maximum height so that if the content exceeds it, it will scroll */
+  max-height: 200px;  /* Adjust as needed for your layout */
+  overflow-y: auto;
+  padding-right: 10px;  /* Optional: adds padding to avoid scrollbar overlap */
+}
+
+/* Individual input group styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/*Model Loading Section*/
+.SideMenuBar .loading-section .loading-section-discription p{
+  font-size: 1.2em;
+  font-style: italic;
+  background-color: #e7f3fe;
+  padding: 15px;
+  border-left: 5px solid #007BFF;
+  margin-bottom: 20px;
+}
+.SideMenuBar .loading-section .button-control-panel .load-button-section {
+  padding-bottom: 0.5vh;
+}
+.SideMenuBar .loading-section .button-control-panel .load-button-section .btn{
+  width: 50%;
+  border: 2px solid #ccc;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f1f1 100%);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.SideMenuBar .loading-section .button-control-panel .load-button-section .disp-btn{
+  width: 50%;
+  border: 2px solid #ccc;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.SideMenuBar .loading-section .button-control-panel .modelDeleteBtn .btn{
+  width: 50%;
+  border: 2px solid #ccc;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f1f1 100%);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.SideMenuBar .loading-section .button-control-panel .btn:hover{
+  background: linear-gradient(180deg, #f9f9f9 0%, #eaeaea 100%);
+  border: 2px solid #8f4cdb;
+}
+.SideMenuBar .loading-section .button-control-panel .btn:active{
+  background: linear-gradient(180deg, #eaeaea 0%, #dcdcdc 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/*Button Group*/
+.SideMenuBar .buttopn-group {
+  display: flex;
+  flex-direction: column;   /* Stack buttons vertically */
+  align-items: center;      /* Center buttons horizontally */
+  gap: 15px;                /* Even spacing between buttons */
+  padding: 20px 0;          /* Optional vertical padding inside the container */
+  width: 100%;
+}
+
+.SideMenuBar .buttopn-group .normal-btn {
+  width: 80%;              
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f1f1 100%);
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.SideMenuBar .buttopn-group .selected-btn {
+  width: 80%;              
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #589ddd 0%, #5599e7 100%);
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.SideMenuBar .buttopn-group button:hover {
+  background: linear-gradient(180deg, #c4bfbf 0%, #eaeaea 100%);
+  border: 2px solid #8f4cdb;
+}
+.SideMenuBar .buttopn-group button:active {
+  background: linear-gradient(180deg, #eaeaea 0%, #dcdcdc 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.SidMenuBar-title p{
+  font-size: 1.2em;
+  font-style: italic;
+  background-color: #e7f3fe;
+  padding: 15px;
+  border-left: 5px solid #007BFF;
+  margin-bottom: 10px;
+}

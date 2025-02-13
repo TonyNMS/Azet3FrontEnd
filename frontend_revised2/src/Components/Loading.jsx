@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import ModelLoading from "./ModelLoading";
-import DutyCycleLoading from "./DutyCycleLoading";
 import {ModelInfoContext, ModelDataContext, SetParameterContext} from "../App";
 const Loading = ()=>{
     const modelName = useContext(ModelInfoContext);
@@ -62,36 +61,37 @@ const Loading = ()=>{
     }
     const modelLoadingStatusRender=(isModelLoaded, isImcompleteModel)=>{
         if(isImcompleteModel && !isModelLoaded){
-            return <p>{modelStatus}</p>
+            return 
         }else if(!isImcompleteModel && isModelLoaded){
             console.log("Model Loading Successful")
             return(
-                <div>
-                    <p>{modelStatus}</p>
-                    <div className = "modelDeleteBtn">
-                        <button onClick = {()=>whenClickDeleteButton(modelName)}>
-                            Delete Model
-                        </button>
-                    </div>
-                    <div className="modelParameterBtn">
-                        <button className= "model-param-btn" onClick={()=>whenClickModelparameter(modelName)}>
-                            Show Parameter
-                        </button>
-                    </div>
+               
+                <div className = "modelDeleteBtn">
+                    <button className='btn' onClick = {()=>whenClickDeleteButton(modelName)}>
+                        Delete Model
+                    </button>
+                    <button className= "btn" onClick={()=>whenClickModelparameter(modelName)}>
+                        Show Parameter
+                    </button>
                 </div>
+               
             )
         }
     }
     return (
-        <div>
-            <h3>Import Model Here</h3>
+        <div className="loading-section">
+            <div className="loading-section-discription">
+                <p>Import Model Here</p>
+            </div>
             <ModelLoading></ModelLoading>
             <div className = "button-control-panel">
-                <div className = "load-delete-button">
-                    <button onClick={()=>whenClickLoadModelBtn(modelName, modelB64)}>Load Model</button>
-                    {modelLoadingStatusRender(isModelLoaded, isImcompleteModel)}
+                <div className="load-button-section">
+                    <button className='btn' onClick={()=>whenClickLoadModelBtn(modelName, modelB64)}>Load Model</button>
+                    <button className='disp-btn'>{modelStatus}</button>
                 </div>
-            </div>
+                {modelLoadingStatusRender(isModelLoaded, isImcompleteModel)}
+            </div> 
+          
         </div>
     )
 }

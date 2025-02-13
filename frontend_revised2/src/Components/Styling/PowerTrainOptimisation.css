@@ -1,0 +1,55 @@
+.powertrain-coponent-optimsation table{
+  margin: auto;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+.powertrain-coponent-optimsation caption{
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px;
+}
+.powertrain-coponent-optimsation th, 
+.powertrain-coponent-optimsation td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.powertrain-coponent-optimsation .opt-parameter-select-table  table{
+  margin: auto;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid transparent;
+}
+
+.powertrain-coponent-optimsation .opt-parameter-select-table  caption{
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px;
+}
+.powertrain-coponent-optimsation .opt-parameter-select-table  th, 
+.powertrain-coponent-optimsation .opt-parameter-select-table  td {
+  border: 1px solid transparent;
+  padding: 10px;
+  text-align: center;
+}
+.powertrain-coponent-optimsation .opt-parameter-select-table input, 
+.powertrain-coponent-optimsation .opt-parameter-select-table select, 
+.powertrain-coponent-optimsation .opt-parameter-select-table button {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  width: 90%;
+}
+.powertrain-coponent-optimsation .batch-simulate-now button{
+  margin: 5px;
+  padding: 12px 20px;
+  background-color: cornflowerblue;
+  color: white;
+  border: 1px solid #080808;
+  font-size: 1em;
+}
+.powertrain-coponent-optimsation .batch-simulate-now button:hover{
+  background-color: rgb(6, 136, 211);
+}
