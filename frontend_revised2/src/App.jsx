@@ -56,6 +56,7 @@ function App() {
     setParameteres(parameter);
   };
   const updateChangedParametersArray = (a)=>{
+    console.log(changedParameters)
     if (a.param === "numberOfIntervals"){
       const newList = changedParameters.filter(item=>item.param !== a.param && item.param !=="interval");
       console.log(`current overriden parameter ${[...newList, a].map(b=>JSON.stringify(b))}`);
@@ -88,13 +89,6 @@ function App() {
     }
     
   };
-
-  /**
-   *<Loading></Loading>
-    <Simulation></Simulation>
-    <Optimisation></Optimisation>
-    <iframe src='https://www.wikipedia.org/' title='WebDesign' loading='eager'></iframe>
-   */
   return (
     <>
       <ResultsContext.Provider value = {resultCollection}>
@@ -117,16 +111,14 @@ function App() {
                                         <Loading></Loading>
                                         <Simulation></Simulation>
                                         <Optimisation></Optimisation>
-                                        <div className='app-container'>
-                                          <RenderedTagsContext.Provider value ={renderedTags}>
-                                            <SetRenderedTagsContext.Provider value ={defineRenderedTag}>
-                                              <SideMenuBar></SideMenuBar>
-                                              <Tags></Tags>
-                                            </SetRenderedTagsContext.Provider>
-                                          </RenderedTagsContext.Provider>
-                                          
-                                        </div>
-                                        
+                                          <div className='app-container'>
+                                            <RenderedTagsContext.Provider value ={renderedTags}>
+                                              <SetRenderedTagsContext.Provider value ={defineRenderedTag}>
+                                                <SideMenuBar></SideMenuBar>
+                                                <Tags></Tags>
+                                              </SetRenderedTagsContext.Provider>
+                                            </RenderedTagsContext.Provider>
+                                          </div>
                                       </SetDutyCycleString.Provider>
                                     </DutyCycleObject.Provider>
                                   </SetDutyCycleDataContext.Provider>

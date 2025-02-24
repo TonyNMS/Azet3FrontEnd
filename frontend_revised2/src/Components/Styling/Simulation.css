@@ -1,0 +1,181 @@
+/* Overall Simulation Section */
+.simulation-section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Upper Row: Component Parameters & Selected Parameters Side-by-Side */
+.upper-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.component-param,
+.selected-param-container {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 15px;
+  box-sizing: border-box;
+  background: #f9f9f9;
+  /* Ensure long content in ParameterList scrolls */
+  overflow-y: auto;
+  max-height: 500px;  /* adjust as needed */
+}
+
+/* Headings for Upper Row */
+.component-param h4,
+.selected-param-container h4 {
+  margin-top: 0;
+}
+
+/* Lower Row: Simulation Parameters & Simulation Record Side-by-Side */
+.lower-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.sim-param,
+.sim-param-record {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 15px;
+  box-sizing: border-box;
+  background: #f9f9f9;
+}
+
+/* Styling for sim-param (toggle and input fields) */
+.sim-param h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.sim-param .toggletestSimParamRecord-slider {
+  margin-bottom: 10px;
+}
+
+.sim-param .toggle-container {
+  margin-bottom: 10px;
+}
+
+.sim-param .responsive-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sim-param .input-container {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-param .input-container label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Styling for the simulation record table */
+.sim-param-record h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.sim-param-record .list-container {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sim-param-record .list-container th,
+.sim-param-record .list-container td {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: left;
+}
+
+/* Simulation Button Container */
+.sim-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+}
+
+.sim-button-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.sim-button-container input[type="text"] {
+  width: 300px;
+  padding: 5px;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.sim-button-container .sim-button {
+  padding: 10px 20px;
+  background-color: #0087f7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Result Section */
+.result-section {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* Quick Access and Advance Options in Component Parameters */
+.quick_access_panel button,
+.advance-option button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Search input styling */
+.search input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+/* Table styling for parameters (inside ParameterList or selected-param-container) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table caption {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Optional: add responsive behavior */
+@media (max-width: 800px) {
+  .upper-row,
+  .lower-row {
+    flex-direction: column;
+  }
+}

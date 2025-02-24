@@ -4,6 +4,7 @@ import axios from "axios";
 import {ChangedParameterContext, ModelInfoContext, ResetChangedParameterContext, ResultsContext, UpdateChangedParameterContext, UpdateResultContext} from "../App";
 import Plotter from "./Plotter";
 import ResultTableDisplay from "./ResultTableDisplay";
+import "./Styling/Simulation.css"
 const Simulation =()=>{
     const modelName = useContext(ModelInfoContext);
     const updateResultCollection = useContext(UpdateResultContext);
@@ -98,13 +99,14 @@ const Simulation =()=>{
         resetChangedParameterArray();
         setSimulationName('');
     };
-    const changeParameter = (parameterName)=>{
+    const changeParameter = (parameterName, e)=>{
         console.log("New Change in SimParameter Registered");
-        updateChangedParametersArray({param:parameterName, value: document.getElementById(parameterName).value,})
+        console.log(`${e.target.value}`)
+        updateChangedParametersArray({param:parameterName, value: e.target.value})
     };
-    const changePriorityParam = (priorityValue)=>{
+    const changePriorityParam = (e)=>{
         console.log("New Change in PoriorityParameter Registered");
-        updateChangedParametersArray({param:"mCtlr_PirorityAssignement", value:priorityValue.target.value});
+        updateChangedParametersArray({param:"mCtlr_PirorityAssignement", value:e.target.value});
     };
     const togglePiroBtn = ()=>{setopenAdvOption(!openAdvOption)};
     const toggleConstHybBtn = ()=>{setOpenHyboption(!openHybOption)};
@@ -114,9 +116,10 @@ const Simulation =()=>{
         {"name":"Sim2", "changedParam":[{param:"param3", value:3},{param:"param4", value:4}]}
     ]
     return( 
-        <div>
-            <div className="component-param">
-                <h4>All Componenet Parameters</h4>
+        <div className="simulation-section">
+            <div className="upper-row">
+                <div className="component-param">
+                    <h4>All Componenet Parameters</h4>
                     <div className = "quick_access_panel">
                         <button value={"generator"} onClick={e=>inputHandeler(e)}>Generator</button>
                         <button value={"fuel_"} onClick={e=>inputHandeler(e)}>Fuel</button>
@@ -126,104 +129,107 @@ const Simulation =()=>{
                         <button value={"battery"} onClick={e=>inputHandeler(e)}>Battery</button>
                         <button value={""} onClick={e=>inputHandeler(e)}> Show All</button>
                     </div>
-                <div className="fuel-option">
+                    <div className="fuel-option">
 
-                </div>
-                <div className = "advance-option">
-                    <button onClick={togglePiroBtn}>Priority Assignment</button>
-                    {renderAdvanceOption()}
-                    {renderHybridoptions()}
-                </div>
-                <div className ="search">
-                    <input type ='search' onChange = {inputHandeler} placeholder="Search a Parameter"></input>
-                </div>
-                <ParameterList input = {inputText}></ParameterList>
-            </div>
-
-            <div className="sim-param">
-                <h4>Simulation Parameters Section</h4>
-                <div className = "toggletestSimParamRecord-slider">
-                    <p>Set Interval</p>
-                    <input type = "checkbox" id = "toggle" checked = {checkedInterval} onChange={handleToggleInterval}/>
-                    <label htmlFor = "toggle" className = "slider"></label>
-                </div>
-                <div className = "toggle-container" onClick = {handleToggleInterval}>
-                    <div className = {'toggle-btn ${!toggle ? "disable":""}'}>{checkedInterval? "ON" : "OFF"}</div>
-                </div>
-                <div className="responsive-form">
-                    <div className="input-container">
-                        <label htmlFor="startTime">Start Time(s)</label>
-                        <input type = "number" id = "startTime" name ="startTime"
-                           onChange={()=>changeParameter("startTime")} 
-                        />
                     </div>
-                    <div className="input-container">
-                        <label htmlFor="endTime">End Time(s)</label>
-                        <input type = "number" id = "endTime" name ="endTime" 
-                            onChange={()=>changeParameter("endTime")}
-                        />
+                    <div className = "advance-option">
+                        <button onClick={togglePiroBtn}>Priority Assignment</button>
+                        {renderAdvanceOption()}
+                        {renderHybridoptions()}
                     </div>
-                    {checkedInterval? (
-                        <div className="input-container">
-                            <label htmlFor="numberOfIntervals">Number of Intervals: </label>
-                            <input type = "number" id = "numberOfIntervals" name ="numberOfIntervals"
-                                onChange = {()=>changeParameter("numberOfIntervals")}
-                            />
-                        </div>
-                    ):null}
-                    {!checkedInterval? (
-                        <div className="input-container">
-                            <label htmlFor="intervalDuration">Intervals Duration(s): </label>
-                            <input type = "number" id = "interval" name ="intervalDuration"
-                                onChange = {()=>changeParameter("interval")}
-                            />
-                        </div>
-                    ):null}
+                    <div className ="search">
+                        <input type ='search' onChange = {inputHandeler} placeholder="Search a Parameter"></input>
+                    </div>
+                    <ParameterList input = {inputText}></ParameterList>
                 </div>
-            </div>
-            <div className = "selected-param-container">
-                <h4>List of Modified Parameter</h4>
-                <table className = "list-container">
-                    <caption> List of Changed Parameters</caption>
-                    <thead>
-                        <tr>
-                            <th>Parameters</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {changedParameters.map((item, index)=> 
-                            <tr key = {index}>
-                                <td><label>{item.param}</label></td>
-                                <td><p>{item.value}</p></td>
+                <div className = "selected-param-container">
+                    <table className = "list-container">
+                        <caption> List of Changed Parameters</caption>
+                        <thead>
+                            <tr>
+                                <th>Parameters</th>
+                                <th>Value</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            <div className = "sim-param-record">
-                <h4>Record of Previous Simulation</h4>
-                <table className = "list-container">
-                    <caption>List of Previous Simulation</caption>
-                    <thead><tr><th>Simulation Name</th><th>Changed Parameter</th><th>Assigned Vaule</th></tr></thead>
-                    <tbody>
-                        {avalibleSimDetails.map((item, index) =>
-                            item.changedParam.map((param, paramIndex) => (
-                                <tr key={`sim-${index}-param-${paramIndex}`}>
-
-                                    {paramIndex === 0 && (
-                                        <td rowSpan={item.changedParam.length}>
-                                            <label>{item.name}</label>
-                                        </td>
-                                    )}
-                                    <td>{param.param}</td>
-                                    <td>{param.value}</td>
+                        </thead>
+                        <tbody>
+                            {changedParameters.map((item, index)=> 
+                                <tr key = {index}>
+                                    <td><label>{item.param}</label></td>
+                                    <td>{item.value}</td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div className="lower-row">
+                <div className="sim-param">
+                    <h4>Simulation Parameters Section</h4>
+                    <div className = "toggletestSimParamRecord-slider">
+                        <p>Set Interval, leave it blank for default value</p>
+                        <input type = "checkbox" id = "toggle" checked = {checkedInterval} onChange={handleToggleInterval}/>
+                        <label htmlFor = "toggle" className = "slider"></label>
+                    </div>
+                    <div className = "toggle-container" onClick = {handleToggleInterval}>
+                        <div className = {'toggle-btn ${!toggle ? "disable":""}'}>{checkedInterval? "ON" : "OFF"}</div>
+                    </div>
+                    <div className="responsive-form">
+                        <div className="input-container">
+                            <label htmlFor="startTime">Start Time(s)</label>
+                            <input type = "number" id = "startTime" name ="startTime"
+                            onChange={(e)=>changeParameter("startTime", e)} 
+                            />
+                        </div>
+                        <div className="input-container">
+                            <label htmlFor="endTime">End Time(s)</label>
+                            <input type = "number" id = "endTime" name ="endTime" 
+                                onChange={(e)=>changeParameter("endTime", e)}
+                            />
+                        </div>
+                        {checkedInterval? (
+                            <div className="input-container">
+                                <label htmlFor="numberOfIntervals">Number of Intervals: </label>
+                                <input type = "number" id = "numberOfIntervals" name ="numberOfIntervals"
+                                    onChange = {(e)=>changeParameter("numberOfIntervals",e)}
+                                />
+                            </div>
+                        ):null}
+                        {!checkedInterval? (
+                            <div className="input-container">
+                                <label htmlFor="intervalDuration">Intervals Duration(s): </label>
+                                <input type = "number" id = "interval" name ="intervalDuration"
+                                    onChange = {(e)=>changeParameter("interval",e)}
+                                />
+                            </div>
+                        ):null}
+                    </div>
+                </div>
+                <div className = "sim-param-record">
+                    <h4>Record of Previous Simulation</h4>
+                    <table className = "list-container">
+                        <caption>List of Previous Simulation</caption>
+                        <thead><tr><th>Simulation Name</th><th>Changed Parameter</th><th>Assigned Vaule</th></tr></thead>
+                        <tbody>
+                            {avalibleSimDetails.map((item, index) =>
+                                item.changedParam.map((param, paramIndex) => (
+                                    <tr key={`sim-${index}-param-${paramIndex}`}>
+                                        {paramIndex === 0 && (
+                                            <td rowSpan={item.changedParam.length}>
+                                                <label>{item.name}</label>
+                                            </td>
+                                        )}
+                                        <td>{param.param}</td>
+                                        <td>{param.value}</td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+
             <div className="sim-button-container">
                 <label>Name Your Simulation</label>
                 <input type = "text" placeholder="Simulation Name" autoCapitalize = "sentences" onChange={(e)=>{handelSimulationName(e.target.value)}}></input>

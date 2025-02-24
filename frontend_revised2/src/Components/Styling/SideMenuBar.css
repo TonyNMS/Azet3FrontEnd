@@ -97,7 +97,7 @@
 }
 .SideMenuBar .loading-section .button-control-panel .btn:hover{
   background: linear-gradient(180deg, #f9f9f9 0%, #eaeaea 100%);
-  border: 2px solid #8f4cdb;
+  border: 2px solid #4c5adb;
 }
 .SideMenuBar .loading-section .button-control-panel .btn:active{
   background: linear-gradient(180deg, #eaeaea 0%, #dcdcdc 100%);

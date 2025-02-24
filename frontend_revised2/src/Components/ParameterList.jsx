@@ -13,9 +13,9 @@ const ParameterList =(props)=>{
             return el.param.includes(props.input);
         }
     });
-    const changeParameter = (parameterName)=>{
-        console.log({param:parameterName.replace(/^"|"$/g,''), value:document.getElementById(parameterName).value});
-        updateChangedParametersArray({param:parameterName.replace(/^"|"$/g,''), value:document.getElementById(parameterName).value})
+    const changeParameter = (parameterName, e)=>{
+        console.log({param:parameterName.replace(/^"|"$/g,''), value:e.target.value});
+        updateChangedParametersArray({param:parameterName.replace(/^"|"$/g,''), value:e.target.value})
     };
     
     return(
@@ -37,7 +37,7 @@ const ParameterList =(props)=>{
                         key ={parameterObject.id}
                         id = {parameterObject.param}
                         name = {parameterObject.param}
-                        onChange={()=>changeParameter(parameterObject.param)}/>                
+                        onChange={(e)=>changeParameter(parameterObject.param, e)}/>                
                         </td>
                     </tr>)
                 }

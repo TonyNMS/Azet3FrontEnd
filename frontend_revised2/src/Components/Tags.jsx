@@ -4,11 +4,12 @@ import 'react-tabs/style/react-tabs.css';
 import "./Styling/Tags.css";
 import Simulation from "./Simulation";
 import {RenderedTagsContext} from "../App"
-import Optimisation from "./Optimsation";
+
 import RouteOptimisation from "./RouteOptimisation";
 import FuelOptimisation from "./FuelOptimisation";
 import CO2Optimisation from "./CO2Optimisation";
 import PowerTrainOptimisation from "./PowerTrainOptimisation";
+
 const ALL_TABS = {
   "Welcome":"Welcome Page",
   "Simulation":"Simulation",
@@ -56,7 +57,6 @@ const Tags = () => {
           {renderTabs()}
         </TabList>
         {renderTabPanels()}
-        
       </Tabs>
     </div>
   );
