@@ -11,7 +11,7 @@ const PRIORITY_OPTIONS = [
 const INITIAL_FUEL_OPTIONS =[
 {"type":"Diesel", "props":{"genereator_FLHV":47e6, "genereator_Frho":820, "genereator_Frho_liq":820, "genereator_FcarbonConent":0.86,"generator_MolarMass":0.233, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6 }},
 {"type":"Methanol", "props":{"genereator_FLHV":20.1e6, "genereator_Frho":791.4, "genereator_Frho_liq":791.4, "genereator_FcarbonConent":0.2,"generator_MolarMass":0.03204, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6}},
-{"type":"Natural Gas", "props":{"genereator_FLHV":47.1e6,"genereator_Frho":0.78, "genereator_Frho_liq":422.6, "genereator_FcarbonConent":0.75,"generator_MolarMass":0.01604, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6}},
+{"type":"Natural Gas", "props":{"genereator_FLHV":47.1e6,"genereator_Frho":500.8, "genereator_Frho_liq":422.6, "genereator_FcarbonConent":0.75,"generator_MolarMass":0.01604, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6}},
 {"type":"Bio Diesel", "props": {"genereator_FLHV": 37.8e6,"genereator_Frho": 920, "genereator_Frho_liq": 920, "genereator_FcarbonConent": 0.4,"generator_MolarMass": 0.292, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6}},
 {"type":"Ammonia", "props": {"genereator_FLHV": 18.6e6, "genereator_Frho": 0.86,"genereator_Frho_liq": 682, "genereator_FcarbonConent": 0.0,"generator_MolarMass": 0.01703, "generator_V_flow_Frat":5.138e-5, "generator_V_flow_Fidle":6.94e-6}}
 ]

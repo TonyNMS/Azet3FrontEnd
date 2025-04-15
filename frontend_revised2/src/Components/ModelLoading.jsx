@@ -26,7 +26,7 @@ const ModelLoading = ()=>{
     const {getRootProps, getInputProps, isDragActive} = useDropzone(
         {
             onDrop,
-            accept: '.mo',
+            accept: {'application/octet-stream':['.mo']},
         }
     );
     return(

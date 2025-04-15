@@ -10,6 +10,7 @@ const SideMenuBar =()=>{
   const [togCarbonBtn, setTogCarBtn] = useState(false);
   const [togPwrBtn, setTogPwrBtn] = useState(false);
   const [togRouteBtn, setTogRouteBtn] = useState(false);
+  const [togSlowSteamBtn, setTogSlowSteamBtn] =useState(false);
   const [toggResBtn, setTogResBtn] = useState(false);
   const toggleSimulation = ()=>{
     setRenderList("Simulation");
@@ -31,9 +32,13 @@ const SideMenuBar =()=>{
     setRenderList("Route");
     setTogRouteBtn(!togRouteBtn);
   }
+  const toggleSlowSteaming =() =>{
+    setRenderList("SlowSteaming");
+    setTogSlowSteamBtn(!togSlowSteamBtn);
+  }
   const toggleResultSummary=()=>{
     setRenderList("Summary");
-    setTogResBtn(!toggResBtn)
+    setTogResBtn(!toggResBtn);
   }
   const vessel_info_form =()=>{
     return(
@@ -81,13 +86,13 @@ const SideMenuBar =()=>{
       <div className="SidMenuBar-title">
         <p>Choose one of the following optimisations</p>
       </div>
-      
       <div className="buttopn-group">
         <button className={togSimBtn? "selected-btn " : "normal-btn"} onClick={toggleSimulation}>Single Simulation</button>
         <button className={togFuelBtn? "selected-btn " : "normal-btn"} onClick={toogleFuelUsageOptimisation}>Fuel Usage Optimisation</button>
         <button className={togCarbonBtn? "selected-btn " : "normal-btn"} onClick={toggleCarbonDioxideOptimisation}>Carbon Dioxide Emission Optimisation</button>
         <button className={togRouteBtn? "selected-btn " : "normal-btn"} onClick={toggleRouteOptimisation}>Route Optimisation</button>
         <button className={togPwrBtn? "selected-btn " : "normal-btn"} onClick={togglePowertrainOptimisation}>Power Train Optimisation</button>
+        <button className={toggResBtn? "selected-btn " : "normal-btn"} onClick={toggleSlowSteaming}>Slow Steaming</button>
         <button className={toggResBtn? "selected-btn " : "normal-btn"} onClick={toggleResultSummary}>Summary Display</button>
       </div>
     </div>

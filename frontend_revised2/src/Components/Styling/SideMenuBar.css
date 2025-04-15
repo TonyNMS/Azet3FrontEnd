@@ -115,26 +115,28 @@
 }
 
 .SideMenuBar .buttopn-group .normal-btn {
-  width: 80%;              
-  padding: 10px 15px;
+  width: 80%;   
+  height: 3.5vh;           
+  padding: auto;
   border: 2px solid #ccc;
   border-radius: 6px;
   background: linear-gradient(180deg, #ffffff 0%, #f1f1f1 100%);
   color: #333;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .SideMenuBar .buttopn-group .selected-btn {
-  width: 80%;              
+  width: 80%;
+  height: 3.5vh;               
   padding: 10px 15px;
   border: 2px solid #ccc;
   border-radius: 6px;
   background: linear-gradient(180deg, #589ddd 0%, #5599e7 100%);
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;

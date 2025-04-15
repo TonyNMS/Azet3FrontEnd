@@ -9,6 +9,7 @@ import RouteOptimisation from "./RouteOptimisation";
 import FuelOptimisation from "./FuelOptimisation";
 import CO2Optimisation from "./CO2Optimisation";
 import PowerTrainOptimisation from "./PowerTrainOptimisation";
+import SlowSteam from "./SlowSteam";
 
 const ALL_TABS = {
   "Welcome":"Welcome Page",
@@ -17,6 +18,7 @@ const ALL_TABS = {
   "Carbon":"CO₂ Emission Estimission",
   "PowerTrain":"Power Train Optimisation",
   "Route":"Route Optimisation",
+  "SlowSteaming":"Slow Steaming",
   "Summary":"Summary Report"
 }
 const ALL_PANELS ={
@@ -25,6 +27,7 @@ const ALL_PANELS ={
   "Fuel":<FuelOptimisation></FuelOptimisation>,
   "Carbon":<CO2Optimisation></CO2Optimisation>,
   "PowerTrain":<PowerTrainOptimisation></PowerTrainOptimisation>,
+  "SlowSteaming":<SlowSteam></SlowSteam>,
   "Route":<RouteOptimisation></RouteOptimisation>
 }
 const Tags = () => {

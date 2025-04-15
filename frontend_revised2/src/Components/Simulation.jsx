@@ -90,7 +90,7 @@ const Simulation =()=>{
                 overrides : changedParameters
             }).then(response =>{
                 updateResultCollection({"sim_name" :simulatioName, "data":response.data.result});
-                console.log("simulation successful");
+                console.log(response.data.result);
             }).catch(error=>{
                 console.log('Error During Simulation:', error);
                 alert(`Simualtion Failed, Check the following error, ${error}`)
@@ -102,7 +102,10 @@ const Simulation =()=>{
     const changeParameter = (parameterName, e)=>{
         console.log("New Change in SimParameter Registered");
         console.log(`${e.target.value}`)
+        console.log(parameterName)
+        console.log(value)
         updateChangedParametersArray({param:parameterName, value: e.target.value})
+        updateChangedParametersArray({param:"dutyCycleRaw",value:"[0,10; 60, 12; 120, 18; 180, 19]"})
     };
     const changePriorityParam = (e)=>{
         console.log("New Change in PoriorityParameter Registered");

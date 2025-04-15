@@ -24,7 +24,6 @@ const Plotter =()=>{
     const [xVarName, setXVarName] = useState('');
     const [yVarName, setYVarName] = useState('');
     const formatTitleArray = (csvString)=>{
-        //extract the Array of avalible varaibles to plot 
         const[keys, ...rest]=csvString.trim().split("\n").map((item)=>item.split(','));
         for(let i=0; i<keys.length; i++){
             keys[i]=keys[i].replace(/\"/g, "");
@@ -53,7 +52,6 @@ const Plotter =()=>{
         const titles = formatTitleArray(item.data);
         return {"name": name, "titles" : titles} 
     })
-    
     const simulationResultOptions =()=>{
         return result.length > 0 ? (
             [<option key = {"sim_name_placeholder"} value ={null}> Select a Simulation</option>, ...result.map((item, index) => (
@@ -66,7 +64,7 @@ const Plotter =()=>{
         );
     }
     const handleCurrentSimulationSelection = (e)=>{
-        // if a simulation name is chosen, then we  ready corresponding data for the other selectors
+        // if a simulation name is chosen, then we  ready the corresponding data for the other selectors
         setCurrentSimName(e);
         const selectedData = formatedResCollection.find((item) => item.name === e)?.data;
         const selectedTitles = formatedTitlesCollection.find((item) => item.name === e)?.titles;    
