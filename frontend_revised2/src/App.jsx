@@ -24,6 +24,8 @@ export const ResetChangedParameterContext =createContext();
 export const DutyCycleDataContext = createContext();
 export const SetDutyCycleDataContext = createContext();
 export const DutyCycleObject = createContext();
+export const DutyCycleStartEndIntervalContext = createContext();
+export const SetDutyCycleStartEndIntervalContext = createContext();
 export const SetDutyCycleString = createContext();
 export const RenderedTagsContext = createContext();
 export const SetRenderedTagsContext = createContext();
@@ -37,6 +39,7 @@ function App() {
   const [changedParameters, setChangedParameters] = useState([]);
   const [csvString, setCSVString] = useState('');
   const [renderedTags, setRenderedTags] = useState(['Welcome']);
+  const [dutyCycleStartEndInterval, setDutyCyleStartEndInterval] = useState([]);
   const updateResultCollection =(newResult)=>{
     setResultCollection([...resultCollection, newResult]);
   };
@@ -106,21 +109,27 @@ function App() {
                               <ResetChangedParameterContext.Provider value={resetChangedParameterArray}>
                                 <DutyCycleDataContext.Provider value={cur_DutyCycle_b64}>
                                   <SetDutyCycleDataContext.Provider value ={setCurrentCSVb64}>
-                                    <DutyCycleObject.Provider value ={csvString}>
-                                      <SetDutyCycleString.Provider value={setCSVObject}>
-                                        <Loading></Loading>
-                                        <Simulation></Simulation>
-                                        <Optimisation></Optimisation>
-                                          <div className='app-container'>
-                                            <RenderedTagsContext.Provider value ={renderedTags}>
-                                              <SetRenderedTagsContext.Provider value ={defineRenderedTag}>
-                                                <SideMenuBar></SideMenuBar>
-                                                <Tags></Tags>
-                                              </SetRenderedTagsContext.Provider>
-                                            </RenderedTagsContext.Provider>
-                                          </div>
-                                      </SetDutyCycleString.Provider>
-                                    </DutyCycleObject.Provider>
+                                    <DutyCycleStartEndIntervalContext.Provider value = {dutyCycleStartEndInterval}>
+                                      <SetDutyCycleStartEndIntervalContext.Provider value = {setDutyCyleStartEndInterval}>
+                                        <DutyCycleObject.Provider value ={csvString}>
+                                        <SetDutyCycleString.Provider value={setCSVObject}>
+                                          {/**<Loading></Loading>
+                                          <Simulation></Simulation>
+                                          <Optimisation></Optimisation>
+                                           */}
+                                          
+                                            <div className='app-container'>
+                                              <RenderedTagsContext.Provider value ={renderedTags}>
+                                                <SetRenderedTagsContext.Provider value ={defineRenderedTag}>
+                                                  <SideMenuBar></SideMenuBar>
+                                                  <Tags></Tags>
+                                                </SetRenderedTagsContext.Provider>
+                                              </RenderedTagsContext.Provider>
+                                            </div>
+                                        </SetDutyCycleString.Provider>
+                                      </DutyCycleObject.Provider>
+                                      </SetDutyCycleStartEndIntervalContext.Provider>
+                                    </DutyCycleStartEndIntervalContext.Provider>
                                   </SetDutyCycleDataContext.Provider>
                                 </DutyCycleDataContext.Provider>
                               </ResetChangedParameterContext.Provider>

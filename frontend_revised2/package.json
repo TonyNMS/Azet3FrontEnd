@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --port 9999 --host 0.0.0.0",
+    "start": "vite preview --port 9999 --host 0.0.0.0"
   },
   "dependencies": {
     "@mui/system": "^6.3.1",
@@ -15,14 +16,20 @@
     "chart.js": "^4.4.7",
     "fabric": "^6.5.4",
     "papaparse": "^5.4.1",
+    "plotly.js": "^3.0.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.3.5",
+    "react-loader-spinner": "^6.1.6",
+    "react-modal": "^3.16.3",
+    "react-plotly.js": "^2.6.0",
     "react-select": "^5.9.0",
+    "react-spinners": "^0.17.0",
     "react-switch": "^7.1.0",
     "react-tabs": "^6.1.0",
-    "react-tooltip": "^5.28.0"
+    "react-tooltip": "^5.28.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

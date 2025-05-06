@@ -122,7 +122,7 @@
   border-radius: 6px;
   background: linear-gradient(180deg, #ffffff 0%, #f1f1f1 100%);
   color: #333;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -136,7 +136,8 @@
   border-radius: 6px;
   background: linear-gradient(180deg, #589ddd 0%, #5599e7 100%);
   color: white;
-  font-size: 12px;
+  font-size: 14px;
+  font-style: italic;
   text-align: center;
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;

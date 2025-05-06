@@ -99,6 +99,9 @@ const CO2Optimisation =()=>{
   const simFlagGenerator =(Fname,LHV, rho,liqRho,carbonContent, molarMass)=>{
     console.log(`Constructing Sim Flag for ${Fname}`)
     return [
+        {param:"startTime", value:0},
+        {param:"stopTime", value:86400},
+        {param:"interval", value:500},
         {param:"generator_FLHV", value:LHV},
         {param:"generator_Frho", value:rho},
         {param:"generator_Frho_liq", value:liqRho},

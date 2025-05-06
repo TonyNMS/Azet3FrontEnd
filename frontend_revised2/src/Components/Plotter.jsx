@@ -111,7 +111,7 @@ const Plotter =()=>{
     const handleSubmission =()=>{
         setPlottingData([...plottingData, {
             "sim_name": currentSimName,
-            "xName" :currentXTitle,
+            "xName" :currentXTitle + " (s)",
             "yName" :currentYTitle,
             "xData" :currentFormatedResult.map(item=>item[currentXTitle]),
             "yData" :currentFormatedResult.map(item=>item[currentYTitle])
@@ -159,7 +159,6 @@ const Plotter =()=>{
 
     return(
         <div className = "plotter=container ">
-            <h3>Plot goes here</h3>
             <div className="plot-option-container">
                 <select value = {currentSimName} onChange={(e)=>handleCurrentSimulationSelection(e.target.value)}>{simulationResultOptions()}</select>
                 <div>

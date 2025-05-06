@@ -1,12 +1,18 @@
 import React, {useContext} from "react";
 import { useCallback } from "react";
 import {useDropzone} from "react-dropzone";
-import { DutyCycleContext, DutyCycleObject, SetDutyCycleContext, SetDutyCycleDataContext, SetDutyCycleString} from "../App";
+import { DutyCycleContext, UpdateChangedParameterContext, SetDutyCycleContext, 
+    SetDutyCycleDataContext, SetDutyCycleString, SetDutyCycleStartEndIntervalContext,
+    DutyCycleStartEndIntervalContext} from "../App";
+    
 const DutyCycleLoading = () =>{
     const dutyCycleName=  useContext(DutyCycleContext);
     const setDutyCycleName = useContext(SetDutyCycleContext);
+    const updateChangedParametersArray = useContext(UpdateChangedParameterContext);  
     const setDutyCycyleB64 = useContext(SetDutyCycleDataContext);
     const setDutyCycleString = useContext(SetDutyCycleString);
+    const setDutyCycleStartEndInterval = useContext(SetDutyCycleStartEndIntervalContext);
+
     const onDrop = useCallback(
         (droppedFile)=>{
             const file = droppedFile[0];
@@ -16,6 +22,32 @@ const DutyCycleLoading = () =>{
                 reader.onload=()=>{
                     const csvText = reader.result;
                     const rows = csvText.trim().split('\n');
+                    console.log(rows[0].split(',').map(val =>val.trim())[0]);
+                    console.log(rows[rows.length-1].split(',').map(val =>val.trim())[0]);
+                    updateChangedParametersArray(
+                        {
+                            param:"startTime",
+                            value:rows[0].split(',').map(val =>val.trim())[0]
+                        }
+                    )
+                    updateChangedParametersArray(
+                        {
+                            param:"stopTime",
+                            value:rows[rows.length-1].split(',').map(val =>val.trim())[0]
+                        }
+                    )
+                    setDutyCycleStartEndInterval(
+                        () =>[
+                            {
+                                param:"startTime",
+                                value:rows[0].split(',').map(val =>val.trim())[0]
+                            },
+                            {
+                                param:"stopTime",
+                                value:rows[rows.length-1].split(',').map(val =>val.trim())[0]
+                            }
+                        ]
+                    )
                     const formatedData = rows
                     .map(
                         row=>{
@@ -28,6 +60,7 @@ const DutyCycleLoading = () =>{
                     )
                     .filter(item => item !== null)
                     .join('; ');
+
                     setDutyCycleString(`{${formatedData}}`);
                     setDutyCycyleB64(btoa(reader.result));
                 };
@@ -37,10 +70,11 @@ const DutyCycleLoading = () =>{
             }
         }
     ,[]);
+  
     const {getRootProps, getInputProps, isDragActive} =  useDropzone(
         {
             onDrop,
-            accept: '.csv',
+            accept: {'application/octet-stream':['.csv']},
         }
     );
     return(

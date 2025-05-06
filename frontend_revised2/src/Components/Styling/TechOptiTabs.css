@@ -1,0 +1,288 @@
+/* TechOptiTabs.css */
+.technical-optimisation-section {
+  display: grid;
+  grid-template-areas:
+    "csv plot"
+    "fuel plot"
+    "crew newComp"
+    "engine action";
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 16px;
+  padding: 16px;
+  background: #f5f7fa;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-csv {
+  grid-area: csv;
+}
+
+.card-plot {
+  grid-area: plot;
+}
+
+.card-fuel {
+  grid-area: fuel;
+}
+
+.card-crew {
+  grid-area: crew;
+  height: 240px; /* fixed around 3 rows height */
+}
+
+.card-newComp {
+  grid-area: newComp;
+}
+
+.card-engine {
+  grid-area: engine;
+}
+
+.card-action {
+  grid-area: action;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Crew Configurator specifics */
+.card-crew .crew-configuration {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-crew .table-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+.card-crew .crew-add-button {
+  flex: none;
+  text-align: right;
+}
+
+.card-crew .crew-configuration h3 {
+  margin-bottom: 8px;
+}
+
+/* Theme accents */
+.card h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+.card-csv,
+.card-fuel {
+  max-height: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .technical-optimisation-section {
+    grid-template-areas:
+      "csv"
+      "fuel"
+      "plot"
+      "crew"
+      "newComp"
+      "engine"
+      "action";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .card-crew {
+    height: auto;
+  }
+}/* ——— Final Result Modal Table ——— */
+.final-result-section {
+  /* keep the flex layout you already have */
+  display: flex;
+  flex-direction: column;
+
+  /* center this entire block horizontally in the modal */
+  align-items: center;
+
+  width: 100%;
+  max-height: 60vh;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.final-result-section table {
+  /* shrink‐wrap the table to its content (up to a max) */
+  width: auto;
+  max-width: 90%;      /* or something like 800px */
+  margin: 0 auto;      /* center horizontally */
+
+  border-collapse: collapse;
+  table-layout: fixed; /* keep your column‐alignment logic */
+}
+
+/* thead stays as before… */
+.final-result-section thead {
+  display: table-header-group;
+}
+
+.final-result-section thead th {
+  position: sticky;
+  top: 0;
+  background: #3498db;
+  color: #fff;
+  z-index: 2;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* tbody scroll logic unchanged */
+.final-result-section tbody {
+  display: block;
+  max-height: calc(60vh - 48px);
+  overflow-y: auto;
+}
+
+.final-result-section tr {
+  display: table;
+  width: 100%;         /* 100% of the (now centered) table */
+  table-layout: fixed;
+}
+
+.final-result-section th:first-child,
+.final-result-section td:first-child {
+  text-align: left;
+}
+
+.final-result-section td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.final-result-section tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.final-result-section td[colspan] {
+  font-weight: bold;
+  background-color: #f1f1f1;
+}
+
+/* mobile stack rules stay the same… */
+@media (max-width: 600px) {
+  .final-result-section table,
+  .final-result-section thead,
+  .final-result-section tbody,
+  .final-result-section tr {
+    display: block;
+  }
+  .final-result-section tr {
+    margin-bottom: 12px;
+  }
+  .final-result-section td {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+  }
+  .final-result-section td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
+/* container and title */
+.results-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.results-title {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: #1f2d3d;
+}
+
+/* the table */
+.results-table {
+  width: 100%;
+  min-width: 800px;       /* ensure it doesn’t squish too much */
+  border-collapse: collapse;
+  table-layout: fixed;    /* keep columns uniform */
+}
+
+/* header row */
+.results-table thead th {
+  background-color: #0d4f6c;
+  color: #fff;
+  padding: 10px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* grouping label cell */
+.group-label {
+  background-color: #0d4f6c;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+/* data cells */
+.results-table td,
+.results-table th {
+  border: 1px solid #ddd;
+}
+
+.results-table td {
+  padding: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* make first four columns centered */
+.results-table td:nth-child(-n+4),
+.results-table thead th:nth-child(-n+4) {
+  text-align: center;
+}
+
+/* zebra striping */
+.results-table tbody tr:nth-child(odd) td {
+  background-color: #ffffff;
+}
+.results-table tbody tr:nth-child(even) td {
+  background-color: #f4f6f8;
+}
+
+/* responsive tweak */
+@media (max-width: 900px) {
+  .results-table {
+    min-width: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .results-container {
+    padding: 8px;
+  }
+  .results-table {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+}

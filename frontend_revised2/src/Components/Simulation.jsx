@@ -100,12 +100,7 @@ const Simulation =()=>{
         setSimulationName('');
     };
     const changeParameter = (parameterName, e)=>{
-        console.log("New Change in SimParameter Registered");
-        console.log(`${e.target.value}`)
-        console.log(parameterName)
-        console.log(value)
         updateChangedParametersArray({param:parameterName, value: e.target.value})
-        updateChangedParametersArray({param:"dutyCycleRaw",value:"[0,10; 60, 12; 120, 18; 180, 19]"})
     };
     const changePriorityParam = (e)=>{
         console.log("New Change in PoriorityParameter Registered");
@@ -185,8 +180,8 @@ const Simulation =()=>{
                         </div>
                         <div className="input-container">
                             <label htmlFor="endTime">End Time(s)</label>
-                            <input type = "number" id = "endTime" name ="endTime" 
-                                onChange={(e)=>changeParameter("endTime", e)}
+                            <input type = "number" id = "stopTime" name ="stopTime" 
+                                onChange={(e)=>changeParameter("stopTime", e)}
                             />
                         </div>
                         {checkedInterval? (
@@ -230,16 +225,13 @@ const Simulation =()=>{
                     </table>
                 </div>
             </div>
-            
-            
-
             <div className="sim-button-container">
                 <label>Name Your Simulation</label>
                 <input type = "text" placeholder="Simulation Name" autoCapitalize = "sentences" onChange={(e)=>{handelSimulationName(e.target.value)}}></input>
                 <button className = "sim-button" onClick = {handelSimulation}>Simulate!</button>
             </div>
             <div className = "result-section">
-                <ResultTableDisplay></ResultTableDisplay>
+                {/*<ResultTableDisplay></ResultTableDisplay>*/}
                 <Plotter></Plotter>
             </div>
         </div>

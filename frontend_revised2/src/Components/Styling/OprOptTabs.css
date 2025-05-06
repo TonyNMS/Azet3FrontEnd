@@ -1,0 +1,252 @@
+/* OperationalOptimisation.css scoped to OperationalOptimisation.jsx */
+.operational-optimisation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: #f5f7fa;
+}
+
+/* First row: dropzone and plot layout */
+.operational-optimisation-section .row-top {
+  display: grid;
+  grid-template-areas:
+    "card-duty card-plot"
+    "card-fuel card-plot";
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+/* Old power train full-width row */
+.operational-optimisation-section .row-old {
+  display: block;
+}
+
+/* Configuration row: crew, checkboxes, action */
+.operational-optimisation-section .row-config {
+  display: grid;
+  grid-template-areas: "card-crew card-optcheckbox card-action";
+  grid-template-columns: 4fr 2fr 1fr;
+  gap: 16px;
+}
+
+/* Engine row */
+.operational-optimisation-section .row-engine {
+  display: block;
+}
+
+/* Results row */
+.operational-optimisation-section .row-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Card base styling */
+.operational-optimisation-section .card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Specific card areas */
+.operational-optimisation-section .card-duty        { grid-area: card-duty; }
+.operational-optimisation-section .card-plot        { grid-area: card-plot; }
+.operational-optimisation-section .card-fuel        { grid-area: card-fuel; }
+.operational-optimisation-section .card-crew        { grid-area: card-crew; height: 240px; }
+.operational-optimisation-section .card-optcheckbox { grid-area: card-optcheckbox; }
+.operational-optimisation-section .card-action      { grid-area: card-action; align-items: center; justify-content: center; }
+.operational-optimisation-section .card-old         { /* full width, styles below */ }
+.operational-optimisation-section .card-engine      { /* full width */ }
+.operational-optimisation-section .card-result3d    { /* spans first column */ }
+.operational-optimisation-section .card-resultopt   { /* spans second column */ }
+
+/* Duty cycle dropzone */
+.operational-optimisation-section .card-duty .dropzone-rect {
+  border: 2px dashed #2c3e50;
+  border-radius: 4px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+/* Crew configurator scroll */
+.operational-optimisation-section .card-crew .table-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+.operational-optimisation-section .card-crew .crew-add-button {
+  flex: none;
+  text-align: right;
+}
+
+/* Optimisation target checkboxes */
+.operational-optimisation-section .card-optcheckbox {
+  /* ensure plenty of padding around */
+  padding: 16px;
+}
+
+.operational-optimisation-section .card-optcheckbox .opt-checkbox-section {
+  /* switch to a 2-column grid: label on the left, checkbox on the right */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  row-gap: 12px;    /* vertical spacing between rows */
+  column-gap: 16px; /* horizontal gap between label & input */
+}
+
+/* make the title span both columns */
+.operational-optimisation-section .card-optcheckbox .opt-checkbox-title {
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+}
+
+/* dial back margins on the label itself */
+.operational-optimisation-section .card-optcheckbox label {
+  display: block;      /* no longer flex */
+  margin: 0;           /* remove old stacking margin */
+  padding: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ensure the checkbox sits flush in its grid cell */
+.operational-optimisation-section .card-optcheckbox input[type="checkbox"] {
+  justify-self: start; /* align the box under the label */
+  margin: 0;           /* reset any default margin */
+  accent-color: #3498db;
+}
+
+/* Old power train configuration styling */
+.operational-optimisation-section .quick-access-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.operational-optimisation-section .quick-access-panel button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.operational-optimisation-section .quick-access-panel button:hover {
+  background: #2980b9;
+}
+
+.operational-optimisation-section .search input[type="search"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.operational-optimisation-section .placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-style: italic;
+  height: 100%;
+}
+
+/* Headings */
+.operational-optimisation-section .card h3,
+.operational-optimisation-section .card h4 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .operational-optimisation-section .row-top,
+  .operational-optimisation-section .row-config,
+  .operational-optimisation-section .row-result {
+    display: block;
+  }
+  .operational-optimisation-section .card-crew {
+    height: auto;
+  }
+}
+
+/* ——— Ensure the result cards are flex‐containers ——— */
+.card-resultopt,
+.card-result3d {
+  display: flex;
+  flex-direction: column;
+  /* these ensure the cards in row-result stretch equally */
+  flex: 1;
+  padding: 0;           /* we’ll let the section itself pad */
+  overflow: hidden;     /* trap any overflow inside */
+}
+
+/* ——— Make the optimum‐section fill its card ——— */
+.optimum-result-section {
+  /* we drop the top margin since the card has its own padding */
+  margin: 0;
+  /* fill parent card */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;           /* optional if card already has bg */
+  border-radius: 0 0 8px 8px; /* match only bottom corners if desired */
+  overflow: hidden;
+}
+
+/* ——— Section header stays fixed, table below scrolls ——— */
+.optimum-result-section h4 {
+  margin: 0;
+  padding: 16px;
+  background-color: #93bae0;
+  color: #fff;
+  flex: none;  /* do not stretch */
+  border-bottom: 1px solid #ddd;
+}
+
+/* ——— Make the table wrapper flex-grow ——— */
+.optimum-result-section table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  /* allow it to shrink/grow */
+  flex: 1;
+  display: block;        /* for interior scrolling */
+  overflow-y: auto;
+}
+
+/* Keep header row aligned above scrolling body */
+.optimum-result-section thead {
+  display: table-header-group;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Body rows scroll as needed */
+.optimum-result-section tbody {
+  display: block;
+  width: 100%;
+  /* subtract header height (≈48px) from parent height for precise fit */
+  max-height: calc(100% - 48px);
+  overflow-y: auto;
+}
+
+/* and now restore row/table display within the scrollable body */
+.optimum-result-section tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}

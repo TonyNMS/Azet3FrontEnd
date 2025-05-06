@@ -10,6 +10,8 @@ import FuelOptimisation from "./FuelOptimisation";
 import CO2Optimisation from "./CO2Optimisation";
 import PowerTrainOptimisation from "./PowerTrainOptimisation";
 import SlowSteam from "./SlowSteam";
+import TechOptiTabs from "./TechOptimisation/TechOptiTabs";
+import OperationalOptTags from "./OperationalOptimisation/OperationalOptTags";
 
 const ALL_TABS = {
   "Welcome":"Welcome Page",
@@ -19,7 +21,9 @@ const ALL_TABS = {
   "PowerTrain":"Power Train Optimisation",
   "Route":"Route Optimisation",
   "SlowSteaming":"Slow Steaming",
-  "Summary":"Summary Report"
+  "Summary":"Summary Report",
+  "TechOpt":"Technical Optimisation",
+  "OprOpt" :"Operation Optimisation"
 }
 const ALL_PANELS ={
   "Welcome":"Welcome Page",
@@ -28,7 +32,10 @@ const ALL_PANELS ={
   "Carbon":<CO2Optimisation></CO2Optimisation>,
   "PowerTrain":<PowerTrainOptimisation></PowerTrainOptimisation>,
   "SlowSteaming":<SlowSteam></SlowSteam>,
-  "Route":<RouteOptimisation></RouteOptimisation>
+  "Route":<RouteOptimisation></RouteOptimisation>,
+  "OprOpt":<OperationalOptTags></OperationalOptTags>,
+  "TechOpt": <TechOptiTabs></TechOptiTabs>,
+  
 }
 const Tags = () => {
   const [tabIndex, setTabIndex] = useState(0);

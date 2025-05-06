@@ -1,35 +1,44 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import ModelLoading from "./ModelLoading";
-import {ModelInfoContext, ModelDataContext, SetParameterContext} from "../App";
+import {ModelInfoContext, ModelDataContext, SetParameterContext, DutyCycleDataContext} from "../App";
+import DutyCycleLoading from "./DutyCycleLoading";
 const Loading = ()=>{
     const modelName = useContext(ModelInfoContext);
     const modelB64 = useContext(ModelDataContext);
+    const dutyCycleB64 = useContext(DutyCycleDataContext)
     const setparameters = useContext(SetParameterContext);
     const [isModelLoaded, setIsModelLoaded] = useState(false);
     const [isImcompleteModel, setIsInCompleteModel] = useState(true);
     const [modelStatus, setModelStatus] = useState('No Model Is Loaded');
-
-    const whenClickLoadModelBtn = (modelName, modelB64) =>{
-        axios.post('http://127.0.0.1:5000/model/upload',
-            {
-                model_name: modelName,
-                model_data: modelB64,
-            }    
-        ).then(response =>{
-            if (response.data.status === `Model written`){
-                setModelStatus(response.data.status);
-                setIsModelLoaded(true);
-                setIsInCompleteModel(false);
-            }else{
-                setModelStatus('Model Not Written')
-            }
-        }).catch(error =>{
-            console.error('Error uploading file:', error);
-            setModelStatus('Error uploading file');
+    
+    const whenClickLoadModelBtn = (modelName, modelB64, dutyCycleB64) => {
+        axios.post('http://127.0.0.1:5000/model/upload', {
+            model_name: modelName,
+            model_data: modelB64
         })
-        
-    }
+        .then(response => {
+          if (response.data.status === "Model written") {
+            setModelStatus(response.data.status);
+            setIsModelLoaded(true);
+            setIsInCompleteModel(false);
+            return axios.post('http://127.0.0.1:5000/model/upload_csv', {
+              csv_data: dutyCycleB64
+            });
+          } else {
+            setModelStatus('Model Not Written');
+            throw new Error("Model not written");
+          }
+        })
+        .then(csvResponse => {
+          console.log('CSV file upload:', csvResponse.data);
+        })
+        .catch(error => {
+          console.error('Error uploading file:', error);
+          setModelStatus('Error uploading file');
+        });
+      };
+      
     const whenClickDeleteButton = (modelName) =>{
         axios.post('http://127.0.0.1:5000/model/delete',{
             model_name: modelName,
@@ -84,10 +93,12 @@ const Loading = ()=>{
                 <p>Import Model Here</p>
             </div>
             <ModelLoading></ModelLoading>
+            <DutyCycleLoading></DutyCycleLoading>
             <div className = "button-control-panel">
                 <div className="load-button-section">
-                    <button className='btn' onClick={()=>whenClickLoadModelBtn(modelName, modelB64)}>Load Model</button>
+                    <button className='btn' onClick={()=>whenClickLoadModelBtn(modelName, modelB64,dutyCycleB64)}>Load Model</button>
                     <button className='disp-btn'>{modelStatus}</button>
+
                 </div>
                 {modelLoadingStatusRender(isModelLoaded, isImcompleteModel)}
             </div> 

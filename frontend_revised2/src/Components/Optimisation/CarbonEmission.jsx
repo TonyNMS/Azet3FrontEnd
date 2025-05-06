@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from "react";
 import axios from "axios";
 import "../Styling/CarbonEmission.css"
-import { ModelInfoContext } from "../../App";
+import { DutyCycleStartEndIntervalContext, ModelInfoContext } from "../../App";
 import CarbonPlotter from "./CarbonPlotter";
 const PRIORITY_OPTIONS = [
         {"name":"Generator Priotiy", "value": 0},
@@ -22,7 +22,7 @@ const createFuelOption = (Fname, FLHV, Frho, FliqRho, Fcarbon, FMolarMass) => ({
 
 const CarbonEmission =()=>{
     const modelName = useContext(ModelInfoContext);
-
+    const dutycCycleStartStopInterval = useContext(DutyCycleStartEndIntervalContext);
     const[useBattery, setUseBattery] = useState(true);
     const[useFuelCell, setUseFuelCell] = useState(true);
     const[H2SOC, setH2SOC] =useState(1);
@@ -55,7 +55,6 @@ const CarbonEmission =()=>{
     const[molarMass, setMolarMass] = useState(-1);
     const[idleFuelFlowRate, setIdleFuelFlowRate] = useState(6.94e-6);
     const[ratedFuelFlowRate, setRatedFuelFlowRate] = useState(5.138e-5);
-
     const[CO2ResultCollection, setCO2ResultCollection] = useState([]);
     const[FuelMassResultCollection, setFuelMassResultCollection] = useState([]);
 
@@ -100,7 +99,10 @@ const CarbonEmission =()=>{
     }
     const simFlagGenerator =(Fname,LHV, rho,liqRho,carbonContent, molarMass)=>{
         console.log(`Constructing Sim Flag for ${Fname}`)
-        return [
+        let paramsFuelAndDuration = [
+            {param:"startTime", value:0},
+            {param:"stopTime", value:86400},
+            {param:"interval", value:500},
             {param:"generator_FLHV", value:LHV},
             {param:"generator_Frho", value:rho},
             {param:"generator_Frho_liq", value:liqRho},
@@ -112,7 +114,9 @@ const CarbonEmission =()=>{
             {param:"hydrogen_tank_storage", value:useFuelCell? H2Volumn : 0.1},
             {param:"battery_SOC_start", value:useBattery? batStartSOC: 0},
             {param:"battery_Capacity", value:useBattery? batCapacity:0.1},
-        ];
+        ]
+
+        return paramsFuelAndDuration;
     }
     const handleSingleSimulation = (Fname, LHV, rho, liqRho, carbonContent, molarMass) => {
         return new Promise((resolve, reject) => {
